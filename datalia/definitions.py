@@ -1,0 +1,18 @@
+import os
+
+from dagster import Definitions, load_assets_from_modules
+from dagster_dbt import DbtCliResource
+from dagster_duckdb_polars import DuckDBPolarsIOManager
+
+from . import assets, dbt
+
+DATABASE_PATH = os.getenv("DATABASE_PATH", "./data/database.duckdb")
+
+all_assets = load_assets_from_modules([assets])
+
+resources = {
+    "io_manager": DuckDBPolarsIOManager(database=DATABASE_PATH),
+    "dbt": DbtCliResource(project_dir=dbt.dbt_project),
+}
+
+defs = Definitions(assets=all_assets, resources=resources)

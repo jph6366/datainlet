@@ -1,0 +1,5 @@
+version: 2
+models:
+  - name: spain_ipc
+    description: Índice de Precios al Consumo (IPC) en España.
+    columns: []

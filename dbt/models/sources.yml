@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: public
+    tables:
+      - name: raw_spain_ipc
+        meta:
+          dagster:
+            asset_key: ["raw_spain_ipc"]

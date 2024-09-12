@@ -1,0 +1,24 @@
+[project]
+name = "datalia"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "dagster>=1.8.6",
+    "duckdb>=1.1.0",
+    "dagster-dbt>=0.24.6",
+    "dagster-duckdb>=0.24.6",
+    "dbt-duckdb>=1.8.3",
+    "ipykernel>=6.29.5",
+    "pyarrow>=17.0.0",
+    "dagster-duckdb-polars>=0.24.6",
+    "python-slugify>=8.0.4",
+]
+
+[tool.dagster]
+module_name = "datalia.definitions"
+code_location_name = "datalia"
+
+[tool.uv]
+dev-dependencies = ["dagster-webserver>=1.8.6"]
