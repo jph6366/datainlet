@@ -11,6 +11,8 @@ COPY --chown=user datalia/ $HOME/app/datalia/
 COPY --chown=user dbt/ $HOME/app/dbt/
 COPY --chown=user Makefile pyproject.toml uv.lock $HOME/app/
 
+RUN mkdir -p $HOME/app/data && chown -R user:user $HOME/app/data
+
 WORKDIR $HOME/app
 
 RUN [ "uv", "sync" ]
