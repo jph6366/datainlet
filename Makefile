@@ -7,6 +7,9 @@ run:
 dev:
 	dagster dev
 
+web:
+	npm run dev --prefix web
+
 setup:
 	uv sync
 	. .venv/bin/activate
