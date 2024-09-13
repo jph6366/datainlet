@@ -8,7 +8,6 @@ COPY Makefile pyproject.toml uv.lock /app/
 
 WORKDIR /app
 
-RUN [ "uv", "sync" ]
+# RUN [ "uv", "sync" ]
 
-CMD [ "uv", "run", "dagster", "dev", "-h", "0.0.0.0", "-p", "3000" ]
-# CMD [ "bash" ]
+CMD [ "uv", "run", "dagster", "dev", "-h", "0.0.0.0", "-p", "7860" ]
