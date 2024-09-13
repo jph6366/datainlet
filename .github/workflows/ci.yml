@@ -1,0 +1,28 @@
+name: ETL
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: 0 0 * * 0
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  run:
+    name: Run
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: astral-sh/setup-uv@v2
+        with:
+          enable-cache: true
+      - name: Run
+        run: |
+          make run

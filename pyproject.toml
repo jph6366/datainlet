@@ -1,6 +1,6 @@
 [project]
 name = "datalia"
-version = "0.1.0"
+version = "1.0.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
@@ -14,7 +14,11 @@ dependencies = [
     "pyarrow>=17.0.0",
     "dagster-duckdb-polars>=0.24.6",
     "python-slugify>=8.0.4",
+    "polars>=1.7.1",
 ]
+
+[tool.setuptools]
+packages = ["datalia"]
 
 [tool.dagster]
 module_name = "datalia.definitions"

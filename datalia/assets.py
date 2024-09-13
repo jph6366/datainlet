@@ -2,7 +2,7 @@ import polars as pl
 from dagster import AssetExecutionContext, RetryPolicy, asset
 from dagster_dbt import DbtCliResource, dbt_assets
 
-from .dbt import dbt_project
+from .dbt_project import dbt_project
 
 
 @dbt_assets(manifest=dbt_project.manifest_path)
