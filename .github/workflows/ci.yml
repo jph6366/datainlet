@@ -33,9 +33,6 @@ jobs:
   # Build and upload the website
   upload:
     name: Upload Pages
-    defaults:
-      run:
-        working-directory: ./web
     runs-on: ubuntu-latest
     permissions:
       contents: read
