@@ -42,8 +42,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+          node-version-file: 'web/package.json'
           cache: npm
-      - run: npm ci
+      - run: npm ci --prefix ./web
       - run: npm run build --prefix ./web
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
