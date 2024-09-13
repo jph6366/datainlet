@@ -13,9 +13,9 @@ def dbt(context: AssetExecutionContext, dbt: DbtCliResource):
 @asset(
     retry_policy=RetryPolicy(max_retries=5),
 )
-def raw_spain_ipc() -> pl.DataFrame:
+def raw_ipc() -> pl.DataFrame:
     """
-    Raw IPC data from INE.
+    Datos de la serie histórica del Índice de Precios de Consumo (IPC) en España en formato CSV.
     """
 
     df = pl.read_csv(

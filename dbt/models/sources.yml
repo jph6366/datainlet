@@ -3,7 +3,7 @@ version: 2
 sources:
   - name: public
     tables:
-      - name: raw_spain_ipc
+      - name: raw_ipc
         meta:
           dagster:
-            asset_key: ["raw_spain_ipc"]
+            asset_key: ["raw_ipc"]

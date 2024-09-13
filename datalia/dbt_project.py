@@ -9,4 +9,5 @@ dbt_project = DbtProject(
     .joinpath("..", RELATIVE_PATH_TO_MY_DBT_PROJECT)
     .resolve(),
 )
+
 dbt_project.prepare_if_dev()
