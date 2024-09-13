@@ -33,6 +33,9 @@ jobs:
   # Build and upload the website
   upload:
     name: Upload Pages
+    defaults:
+      run:
+        working-directory: ./web
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -42,7 +45,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          node-version-file: 'web/package.json'
+          cache-dependency-path: 'web/package.json'
           cache: npm
       - run: npm ci --prefix ./web
       - run: npm run build --prefix ./web
