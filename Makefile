@@ -7,6 +7,7 @@ run:
 dev:
 	dagster dev
 
+.PHONY: web
 web:
 	npm run dev --prefix web
 

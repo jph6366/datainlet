@@ -1,5 +1,27 @@
 version: 2
 models:
   - name: ipc
-    description: Índice de Precios al Consumo (IPC) en España.
-    columns: []
+    description: >
+      Índice de Precios de Consumo (IPC) en España.
+      Es una medida estadística de la evolución de los precios de los bienes y servicios que consume la población residente en viviendas familiares en España.
+
+      Datos extraídos de INE (Instituto Nacional de Estadística).
+
+      - [Inventario](https://www.ine.es/dyngs/IOE/es/operacion.htm?numinv=30138)
+
+      - [Informe Metodológico](https://www.ine.es/dynt3/metadatos/es/RespuestaDatos.htm?oe=30138)
+    columns:
+      - name: fecha
+        description: Fecha de la observación.
+        data_tests:
+          - not_null
+      - name: id_clase
+        description: Identificador de la clase de bienes y servicios.
+        data_tests:
+          - not_null
+      - name: nombre_clase
+        description: Nombre de la clase de bienes y servicios.
+        data_tests:
+          - not_null
+      - name: valor
+        description: Valor del IPC.

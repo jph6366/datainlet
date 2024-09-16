@@ -1,16 +1,8 @@
----
-title: Datalia
-emoji: 🚀
-sdk: docker
-pinned: false
-license: mit
----
-
 <!-- markdownlint-disable MD033 MD041-->
 
 <p align="center">
   <h1 style="font-size:80px; font-weight: 800;" align="center">D A T A L I A</h1>
-  <p align="center">Otra Pataforma de Datos Abiertos</a> </p>
+  <p align="center">Datos, sin complicaciones.</a> </p>
 </p>
 
 <div align="center">
