@@ -1,7 +1,7 @@
 version: 2
 
 sources:
-  - name: raw
+  - name: main
     tables:
       - name: raw_ipc
         meta:

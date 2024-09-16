@@ -1,5 +1,5 @@
 with source as (
-    select * from {{ source('raw', 'raw_ipc') }}
+    select * from {{ source('main', 'raw_ipc') }}
 ),
 
 renamed as (
