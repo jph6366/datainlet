@@ -13,8 +13,8 @@ dependencies = [
     "ipykernel>=6.29.5",
     "pyarrow>=17.0.0",
     "dagster-duckdb-polars>=0.24.6",
-    "python-slugify>=8.0.4",
     "polars>=1.7.1",
+    "huggingface-hub>=0.24.7",
 ]
 
 [tool.setuptools]
