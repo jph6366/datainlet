@@ -58,7 +58,7 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ steps.date.outputs.date }}
-          file: .data/database.duckdb
+          file: data/database.duckdb
           asset_name: datalia.duckdb
           overwrite: true
   # Build and upload the website
