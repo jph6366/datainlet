@@ -34,29 +34,37 @@ jobs:
       - name: Get current date
         id: date
         run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Create Release
+      #   id: create_release
+      #   uses: actions/create-release@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     tag_name: v${{ steps.date.outputs.date }}
+      #     release_name: Datalia - ${{ steps.date.outputs.date }}
+      #     draft: true
+      #     prerelease: false
+      # - name: Upload DuckDB file to release
+      #   uses: actions/upload-release-asset@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     upload_url: ${{ steps.create_release.outputs.upload_url }}
+      #     asset_path: .data/database.duckdb
+      #     asset_name: datalia.duckdb
+      #     asset_content_type: application/octet-stream
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
         with:
-          tag_name: v${{ steps.date.outputs.date }}
-          release_name: Datalia - ${{ steps.date.outputs.date }}
-          draft: true
-          prerelease: false
-      - name: Upload DuckDB file to release
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: .data/database.duckdb
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ steps.date.outputs.date }}
+          file: .data/database.duckdb
           asset_name: datalia.duckdb
-          asset_content_type: application/octet-stream
-
+          overwrite: true
   # Build and upload the website
   upload:
-    name: Upload Pages
+    name: Upload Page
+    needs: run
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -77,6 +85,7 @@ jobs:
 
   # Deploy the website
   deploy:
+    name: Deploy Page
     needs: upload
     permissions:
       pages: write
