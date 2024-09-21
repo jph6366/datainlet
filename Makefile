@@ -5,7 +5,7 @@ run:
 	uv run dagster asset materialize --select \* -m datalia.definitions
 
 dev:
-	dagster dev
+	uv run dagster dev
 
 .PHONY: web
 web:

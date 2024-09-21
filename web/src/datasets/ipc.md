@@ -14,7 +14,7 @@ _Última actualización:  ${new Date(now).toLocaleDateString()}_
 </div>
 <div class="card">
 
-_💾 [Descargar](https://huggingface.co/datasets/datonic/spain_ipc)_
+_💾 [Descargar](https://huggingface.co/datasets/davidgasquez/ipc)_
 
 </div>
 </div>
