@@ -2,6 +2,7 @@ import os
 
 from dagster import Definitions, EnvVar, load_assets_from_modules
 from dagster_dbt import DbtCliResource
+from dagster_duckdb import DuckDBResource
 from dagster_duckdb_polars import DuckDBPolarsIOManager
 
 from . import assets, dbt_project, publishing
@@ -13,6 +14,7 @@ all_assets = load_assets_from_modules([assets, publishing])
 
 resources = {
     "io_manager": DuckDBPolarsIOManager(database=DATABASE_PATH, schema="main"),
+    "duckdb": DuckDBResource(database=DATABASE_PATH),
     "dbt": DbtCliResource(project_dir=dbt_project.dbt_project),
     "dp": DatasetPublisher(hf_token=EnvVar("HUGGINGFACE_TOKEN")),
     "aemet_api": AEMETAPI(token=EnvVar("AEMET_API_TOKEN")),

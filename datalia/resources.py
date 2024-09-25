@@ -104,8 +104,11 @@ class AEMETAPI(ConfigurableResource):
         }
 
         response = self._client.get(url, headers=headers, params=query)
-
         response.raise_for_status()
+
+        if response.json().get("estado") == 404:
+            log.info("No data found")
+            return None
 
         data_url = response.json().get("datos")
         if data_url is None:
@@ -118,9 +121,7 @@ class AEMETAPI(ConfigurableResource):
 
         return data
 
-    def get_weather_data(
-        self, start_date: datetime.datetime, end_date: datetime.datetime
-    ):
+    def get_weather_data(self, start_date: datetime.date, end_date: datetime.date):
         start_date_str = start_date.strftime("%Y-%m-01") + "T00:00:00UTC"
         end_date_str = end_date.strftime("%Y-%m-01") + "T00:00:00UTC"
 

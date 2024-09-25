@@ -1,20 +1,22 @@
-from datetime import datetime
+import datetime
 
+import dagster as dg
 import polars as pl
-from dagster import AssetExecutionContext, RetryPolicy, asset
 from dagster_dbt import DbtCliResource, dbt_assets
+from dagster_duckdb import DuckDBResource
+from duckdb import CatalogException
 
 from .dbt_project import dbt_project
 from .resources import AEMETAPI
 
 
 @dbt_assets(manifest=dbt_project.manifest_path)
-def dbt(context: AssetExecutionContext, dbt: DbtCliResource):
+def dbt(context: dg.AssetExecutionContext, dbt: DbtCliResource):
     yield from dbt.cli(["build"], context=context).stream()
 
 
-@asset(
-    retry_policy=RetryPolicy(max_retries=5),
+@dg.asset(
+    retry_policy=dg.RetryPolicy(max_retries=5),
 )
 def raw_ipc() -> pl.DataFrame:
     """
@@ -28,7 +30,7 @@ def raw_ipc() -> pl.DataFrame:
     return df
 
 
-@asset()
+@dg.asset()
 def raw_spain_aemet_stations(aemet_api: AEMETAPI) -> pl.DataFrame:
     """
     Datos de las estaciones meteorológicas de AEMET.
@@ -57,23 +59,50 @@ def raw_spain_aemet_stations(aemet_api: AEMETAPI) -> pl.DataFrame:
     return df
 
 
-@asset()
+@dg.asset()
 def raw_spain_aemet_weather(
-    context: AssetExecutionContext, aemet_api: AEMETAPI
-) -> pl.DataFrame:
+    context: dg.AssetExecutionContext, duckdb: DuckDBResource, aemet_api: AEMETAPI
+) -> dg.MaterializeResult:
     """
     Datos meteorológicos de AEMET de todas las estaciones meteorológicas en España desde 1920.
     """
 
-    start_date = datetime(2024, 1, 1)  # TODO: Cambiar a 1920
-    end_date = datetime.now()
+    AEMET_API_FIRST_DAY = datetime.datetime(1920, 1, 1).date()
 
-    r = aemet_api.get_weather_data(start_date, end_date)
+    asset_name = context.asset_key.to_user_string()
+
+    with duckdb.get_connection() as conn:
+        try:
+            from_date = conn.execute(
+                f"""
+                select
+                    max(fecha)
+                from 'main.{asset_name}';
+                """
+            ).fetchall()[0][0]
+
+            from_date = from_date + datetime.timedelta(days=1)
+        except CatalogException:
+            from_date = AEMET_API_FIRST_DAY
+
+    to_date = datetime.date.today() - datetime.timedelta(days=1)
+
+    context.log.info(f"Data missing range: {from_date} to {to_date}")
+
+    if from_date >= to_date:
+        context.log.info("No data to insert")
+        return dg.MaterializeResult()
+
+    r = aemet_api.get_weather_data(from_date, to_date)
 
     df = pl.DataFrame()
     for d in r:
         ndf = pl.DataFrame(d)
         df = pl.concat([df, ndf], how="diagonal_relaxed")
+
+    if df.shape[0] == 0:
+        context.log.info("No data to insert")
+        return dg.MaterializeResult()
 
     df = df.with_columns(pl.col("fecha").str.strptime(pl.Date, format="%Y-%m-%d"))
 
@@ -96,4 +125,15 @@ def raw_spain_aemet_weather(
         ]
     )
 
-    return df
+    context.log.info(f"Inserting latest data into main.{asset_name}")
+
+    with duckdb.get_connection() as conn:
+        query = f"create or replace table 'main.{asset_name}' as select * from df"
+
+        print(from_date, AEMET_API_FIRST_DAY)
+        if from_date != AEMET_API_FIRST_DAY:
+            query = query + f" union all select * from 'main.{asset_name}'"
+
+        conn.execute(query)
+
+    return dg.MaterializeResult()
