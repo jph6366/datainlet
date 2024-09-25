@@ -1,12 +1,12 @@
 import polars as pl
 from dagster import AssetIn, asset
 
-from .resources import DatasetPublisher
+from datalia.huggingface.resources import HuggingFaceDatasetPublisher
 
 
 def create_hf_asset(dataset_name: str):
     @asset(name="huggingface_" + dataset_name, ins={"data": AssetIn(dataset_name)})
-    def hf_asset(data: pl.DataFrame, dp: DatasetPublisher) -> None:
+    def hf_asset(data: pl.DataFrame, dp: HuggingFaceDatasetPublisher) -> None:
         """
         Materialización del dataset en HuggingFace Datasets.
         """
@@ -36,9 +36,7 @@ Este conjunto de datos ha sido producido y publicado automáticamente por [Datal
     return hf_asset
 
 
-datasets = [
-    "ipc",
-]
+datasets = ["ipc"]
 
 assets = []
 for dataset in datasets:

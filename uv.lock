@@ -1350,14 +1350,14 @@ pyarrow = [
 
 [[package]]
 name = "prompt-toolkit"
-version = "3.0.47"
+version = "3.0.48"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "wcwidth" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/47/6d/0279b119dafc74c1220420028d490c4399b790fc1256998666e3a341879f/prompt_toolkit-3.0.47.tar.gz", hash = "sha256:1e1b29cb58080b1e69f207c893a1a7bf16d127a5c30c9d17a25a5d77792e5360", size = 425859 }
+sdist = { url = "https://files.pythonhosted.org/packages/2d/4f/feb5e137aff82f7c7f3248267b97451da3644f6cdc218edfe549fb354127/prompt_toolkit-3.0.48.tar.gz", hash = "sha256:d6623ab0477a80df74e646bdbc93621143f5caf104206aa29294d53de1a03d90", size = 424684 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/e8/23/22750c4b768f09386d1c3cc4337953e8936f48a888fa6dddfb669b2c9088/prompt_toolkit-3.0.47-py3-none-any.whl", hash = "sha256:0d7bfa67001d5e39d02c224b663abc33687405033a8c422d0d675a5a13361d10", size = 386411 },
+    { url = "https://files.pythonhosted.org/packages/a9/6a/fd08d94654f7e67c52ca30523a178b3f8ccc4237fce4be90d39c938a831a/prompt_toolkit-3.0.48-py3-none-any.whl", hash = "sha256:f49a827f90062e411f1ce1f854f2aedb3c23353244f8108b89283587397ac10e", size = 386595 },
 ]
 
 [[package]]
@@ -1780,11 +1780,11 @@ wheels = [
 
 [[package]]
 name = "sqlglot"
-version = "25.22.0"
+version = "25.23.2"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/82/7c/a5b77005bdb521dba4f6e27f032dacc5a1b16f5ea40571fea92e422b2e0a/sqlglot-25.22.0.tar.gz", hash = "sha256:f7b9291556ac73301c1a72dffe1802c0c2bf56c9d223382b3cc4cdfc2b9c26b8", size = 19446848 }
+sdist = { url = "https://files.pythonhosted.org/packages/b6/96/2945320540a206ae931c0c48f1e0fc9b03c011364a65b002ef02fd157cdd/sqlglot-25.23.2.tar.gz", hash = "sha256:fbf384de30f83ba01c47f1b953509da2edc0b4c906e6c5491a90c8accbd6ed26", size = 19470352 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/64/f2/b0f72aa89bed31cbb972deb28bd47c6e326f232e8bf045a25bf0065f61ac/sqlglot-25.22.0-py3-none-any.whl", hash = "sha256:3f03239456d6e19a922f2f59504e6363e8ed6ff8bbf6972c167ee5bf8d32a957", size = 413927 },
+    { url = "https://files.pythonhosted.org/packages/a5/b7/790e9bfab8c77e724d7966850be0fbf02795373b3f1bcc526ea9153ef68d/sqlglot-25.23.2-py3-none-any.whl", hash = "sha256:52b8c82da4b338fe5163395d6dbc4346fb39142d2735b0b662fc70a28b71472c", size = 415032 },
 ]
 
 [package.optional-dependencies]
@@ -1835,14 +1835,14 @@ wheels = [
 
 [[package]]
 name = "starlette"
-version = "0.39.0"
+version = "0.39.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "anyio" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/27/96/30ace6a600eda6930c944121526187d084ac6d700f2463a5ad82d8aa5116/starlette-0.39.0.tar.gz", hash = "sha256:b35acedae74e95967dd9c0a47b45f5803dcd8973d0d95c18c1abb184845ba42c", size = 2572088 }
+sdist = { url = "https://files.pythonhosted.org/packages/65/d2/89a812386fff01247481fb5a9709b4eac1e16753a9ff2915ec6c23cad108/starlette-0.39.1.tar.gz", hash = "sha256:33c5a94f64d3ab2c799b2715b45f254a3752f229d334f1562a3aaf78c23eab95", size = 2572706 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/40/78/a92e875e8c8daeb3ffe19f16e832852f2c3e82a96eec5455c69439517104/starlette-0.39.0-py3-none-any.whl", hash = "sha256:57164a38948018134537d31367fb46ef9be6050a8e955fb4990235960ed03f92", size = 73034 },
+    { url = "https://files.pythonhosted.org/packages/4f/1e/6b047a1fe8918d36b2fc01369786aa7847c70db2c7cbe9f2449833629707/starlette-0.39.1-py3-none-any.whl", hash = "sha256:0d31c90dacae588734e91b98cb4469fd37848ef23d2dd34355c5542bc827c02a", size = 73125 },
 ]
 
 [[package]]

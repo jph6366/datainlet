@@ -1,23 +1,13 @@
-import os
+import dagster as dg
 
-from dagster import Definitions, EnvVar, load_assets_from_modules
-from dagster_dbt import DbtCliResource
-from dagster_duckdb import DuckDBResource
-from dagster_duckdb_polars import DuckDBPolarsIOManager
+import datalia.aemet.definitions as aemet_definitions
+import datalia.dbt.definitions as dbt_definitions
+import datalia.huggingface.definitions as huggingface_definitions
+import datalia.ine.definitions as ine_definitions
 
-from . import assets, dbt_project, publishing
-from .resources import AEMETAPI, DatasetPublisher
-
-DATABASE_PATH = os.getenv("DATABASE_PATH", "./data/database.duckdb")
-
-all_assets = load_assets_from_modules([assets, publishing])
-
-resources = {
-    "io_manager": DuckDBPolarsIOManager(database=DATABASE_PATH, schema="main"),
-    "duckdb": DuckDBResource(database=DATABASE_PATH),
-    "dbt": DbtCliResource(project_dir=dbt_project.dbt_project),
-    "dp": DatasetPublisher(hf_token=EnvVar("HUGGINGFACE_TOKEN")),
-    "aemet_api": AEMETAPI(token=EnvVar("AEMET_API_TOKEN")),
-}
-
-defs = Definitions(assets=[*all_assets], resources=resources)
+definitions = dg.Definitions.merge(
+    aemet_definitions.definitions,
+    ine_definitions.definitions,
+    dbt_definitions.definitions,
+    huggingface_definitions.definitions,
+)
