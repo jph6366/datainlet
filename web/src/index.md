@@ -12,3 +12,18 @@ Datalia es una plataforma de datos abiertos a nivel de España con el objetivo d
 Gracias a la colaboración de la comunidad, Datalia ofrece una variedad de conjuntos de datos. A continuación, se muestran algunos de los conjuntos de datos disponibles.
 
 - [IPC](/datasets/ipc)
+
+## Recursos
+
+Algunos recursos que pueden ser de utilidad relacionados con datos abiertos y transparencia a nivel de España.
+
+### Portales
+
+- [INE](https://www.ine.es/).
+- [Datos Abiertos de España](https://datos.gob.es/).
+- [DGT](https://nap.dgt.es/dataset). Tambien en [mapa](https://infocar.dgt.es/etraffic/).
+- [WikiData](https://www.wikidata.org/).
+- [ESRI](https://opendata.esri.es/search?collection=Dataset).
+- [Datadista](https://www.datadista.com/).
+- [Newtral](https://transparentia.newtral.es/buscador).
+- [Spanish Origin Destination Data](https://github.com/rOpenSpain/spanishoddata)
