@@ -61,7 +61,7 @@ def raw_aemet_stations_weather(
 
     context.log.info(f"Getting data from {from_date} to {to_date}")
 
-    df = pl.DataFrame(aemet_api.get_weather_data(from_date, to_date, batch_size=30))
+    df = pl.DataFrame(aemet_api.get_weather_data(from_date, to_date))
 
     return df
 
