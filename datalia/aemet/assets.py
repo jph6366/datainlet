@@ -2,20 +2,28 @@ import datetime
 
 import dagster as dg
 import polars as pl
-from dagster_duckdb import DuckDBResource
-from duckdb import CatalogException
 
 from datalia.aemet.resources import AEMETAPI
 
 
 @dg.asset()
-def raw_spain_aemet_stations(aemet_api: AEMETAPI) -> pl.DataFrame:
+def raw_aemet_stations(aemet_api: AEMETAPI) -> pl.DataFrame:
     """
     Datos de las estaciones meteorológicas de AEMET.
     """
 
-    df = pl.DataFrame(aemet_api.get_all_stations())
-    df.with_columns(pl.col("indsinop").cast(pl.Int32, strict=False).alias("indsinop"))
+    return pl.DataFrame(aemet_api.get_all_stations())
+
+
+@dg.asset()
+def aemet_stations(raw_aemet_stations: pl.DataFrame) -> pl.DataFrame:
+    """
+    Datos de las estaciones meteorológicas de AEMET procesados.
+    """
+
+    raw_aemet_stations.with_columns(
+        pl.col("indsinop").cast(pl.Int32, strict=False).alias("indsinop")
+    )
 
     # Clean latitud and longitud
     def convert_to_decimal(coord):
@@ -27,7 +35,7 @@ def raw_spain_aemet_stations(aemet_api: AEMETAPI) -> pl.DataFrame:
             decimal = -decimal
         return decimal
 
-    df = df.with_columns(
+    df = raw_aemet_stations.with_columns(
         [
             pl.col("latitud").map_elements(convert_to_decimal).alias("latitud"),
             pl.col("longitud").map_elements(convert_to_decimal).alias("longitud"),
@@ -38,80 +46,91 @@ def raw_spain_aemet_stations(aemet_api: AEMETAPI) -> pl.DataFrame:
 
 
 @dg.asset()
-def raw_spain_aemet_weather(
-    context: dg.AssetExecutionContext, duckdb: DuckDBResource, aemet_api: AEMETAPI
-) -> dg.MaterializeResult:
+def raw_aemet_stations_weather(
+    context: dg.AssetExecutionContext,
+    # duckdb: DuckDBResource,
+    aemet_api: AEMETAPI,
+    # ) -> dg.MaterializeResult:
+) -> pl.DataFrame:
     """
     Datos meteorológicos de AEMET de todas las estaciones meteorológicas en España desde 1920.
     """
 
-    AEMET_API_FIRST_DAY = datetime.datetime(1920, 1, 1).date()
-
-    asset_name = context.asset_key.to_user_string()
-
-    with duckdb.get_connection() as conn:
-        try:
-            from_date = conn.execute(
-                f"""
-                select
-                    max(fecha)
-                from 'main.{asset_name}';
-                """
-            ).fetchall()[0][0]
-
-            from_date = from_date + datetime.timedelta(days=1)
-        except CatalogException:
-            from_date = AEMET_API_FIRST_DAY
-
+    from_date = datetime.datetime(1920, 1, 1).date()
     to_date = datetime.date.today() - datetime.timedelta(days=1)
 
-    context.log.info(f"Data missing range: {from_date} to {to_date}")
+    context.log.info(f"Getting data from {from_date} to {to_date}")
 
-    if from_date >= to_date:
-        context.log.info("No data to insert")
-        return dg.MaterializeResult()
+    df = pl.DataFrame(aemet_api.get_weather_data(from_date, to_date, batch_size=30))
 
-    r = aemet_api.get_weather_data(from_date, to_date)
+    return df
 
-    df = pl.DataFrame()
-    for d in r:
-        ndf = pl.DataFrame(d)
-        df = pl.concat([df, ndf], how="diagonal_relaxed")
+    # AEMET_API_FIRST_DAY = datetime.datetime(1920, 1, 1).date()
+    # asset_name = context.asset_key.to_user_string()
 
-    if df.shape[0] == 0:
-        context.log.info("No data to insert")
-        return dg.MaterializeResult()
+    # with duckdb.get_connection() as conn:
+    #     try:
+    #         from_date = conn.execute(
+    #             f"""
+    #             select
+    #                 max(fecha)
+    #             from 'main.{asset_name}';
+    #             """
+    #         ).fetchall()[0][0]
 
-    df = df.with_columns(pl.col("fecha").str.strptime(pl.Date, format="%Y-%m-%d"))
+    #         from_date = from_date + datetime.timedelta(days=1)
+    #     except CatalogException:
+    #         from_date = AEMET_API_FIRST_DAY
 
-    float_columns = [
-        "prec",
-        "presMax",
-        "presMin",
-        "racha",
-        "sol",
-        "tmax",
-        "tmed",
-        "tmin",
-        "velmedia",
-    ]
+    # to_date = datetime.date.today() - datetime.timedelta(days=1)
 
-    df = df.with_columns(
-        [
-            pl.col(col).str.replace(",", ".").cast(pl.Float64, strict=False)
-            for col in float_columns
-        ]
-    )
+    # context.log.info(f"Data missing range: {from_date} to {to_date}")
 
-    context.log.info(f"Inserting latest data into main.{asset_name}")
+    # if from_date >= to_date:
+    #     context.log.info("No data to insert")
+    #     return dg.MaterializeResult()
 
-    with duckdb.get_connection() as conn:
-        query = f"create or replace table 'main.{asset_name}' as select * from df"
+    # r = aemet_api.get_weather_data(from_date, to_date)
 
-        print(from_date, AEMET_API_FIRST_DAY)
-        if from_date != AEMET_API_FIRST_DAY:
-            query = query + f" union all select * from 'main.{asset_name}'"
+    # df = pl.DataFrame()
+    # for d in r:
+    #     ndf = pl.DataFrame(d)
+    #     df = pl.concat([df, ndf], how="diagonal_relaxed")
 
-        conn.execute(query)
+    # if df.shape[0] == 0:
+    #     context.log.info("No data to insert")
+    #     return dg.MaterializeResult()
 
-    return dg.MaterializeResult()
+    # df = df.with_columns(pl.col("fecha").str.strptime(pl.Date, format="%Y-%m-%d"))
+
+    # float_columns = [
+    #     "prec",
+    #     "presMax",
+    #     "presMin",
+    #     "racha",
+    #     "sol",
+    #     "tmax",
+    #     "tmed",
+    #     "tmin",
+    #     "velmedia",
+    # ]
+
+    # df = df.with_columns(
+    #     [
+    #         pl.col(col).str.replace(",", ".").cast(pl.Float64, strict=False)
+    #         for col in float_columns
+    #     ]
+    # )
+
+    # context.log.info(f"Inserting latest data into main.{asset_name}")
+
+    # with duckdb.get_connection() as conn:
+    #     query = f"create or replace table 'main.{asset_name}' as select * from df"
+
+    #     print(from_date, AEMET_API_FIRST_DAY)
+    #     if from_date != AEMET_API_FIRST_DAY:
+    #         query = query + f" union all select * from 'main.{asset_name}'"
+
+    #     conn.execute(query)
+
+    # return dg.MaterializeResult()
