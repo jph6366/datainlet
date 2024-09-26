@@ -50,17 +50,14 @@ class AEMETAPI(dg.ConfigurableResource):
         return data
 
     def get_weather_data(
-        self, start_date: datetime.date, end_date: datetime.date, batch_size: int = 30
-    ):
+        self, start_date: datetime.date, end_date: datetime.date):
         start_date_str = start_date.strftime("%Y-%m-01") + "T00:00:00UTC"
         end_date_str = end_date.strftime("%Y-%m-01") + "T00:00:00UTC"
 
         current_date = start_date
 
         while current_date < end_date:
-            next_date = min(
-                current_date + datetime.timedelta(days=batch_size), end_date
-            )
+            next_date = min(current_date + datetime.timedelta(days=15), end_date)
 
             start_date_str = current_date.strftime("%Y-%m-%d") + "T00:00:00UTC"
             end_date_str = next_date.strftime("%Y-%m-%d") + "T00:00:00UTC"
