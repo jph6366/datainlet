@@ -22,6 +22,7 @@ Algunos recursos que pueden ser de utilidad relacionados con datos abiertos y tr
 - [INE](https://www.ine.es/).
 - [Datos Abiertos de España](https://datos.gob.es/).
 - [DGT](https://nap.dgt.es/dataset). Tambien en [mapa](https://infocar.dgt.es/etraffic/).
+- [AEMET](https://opendata.aemet.es/centrodedescargas/inicio).
 - [WikiData](https://www.wikidata.org/).
 - [ESRI](https://opendata.esri.es/search?collection=Dataset).
 - [Datadista](https://www.datadista.com/).

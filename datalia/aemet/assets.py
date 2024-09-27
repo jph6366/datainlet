@@ -2,6 +2,8 @@ import datetime
 
 import dagster as dg
 import polars as pl
+from dagster_duckdb import DuckDBResource
+from duckdb import CatalogException
 
 from datalia.aemet.resources import AEMETAPI
 
@@ -48,89 +50,50 @@ def aemet_stations(raw_aemet_stations: pl.DataFrame) -> pl.DataFrame:
 @dg.asset()
 def raw_aemet_stations_weather(
     context: dg.AssetExecutionContext,
-    # duckdb: DuckDBResource,
+    duckdb: DuckDBResource,
     aemet_api: AEMETAPI,
-    # ) -> dg.MaterializeResult:
-) -> pl.DataFrame:
+) -> dg.MaterializeResult:
     """
     Datos meteorológicos de AEMET de todas las estaciones meteorológicas en España desde 1920.
     """
 
-    from_date = datetime.datetime(1920, 1, 1).date()
+    AEMET_API_FIRST_DAY = datetime.datetime(1920, 1, 1).date()
+
+    asset_name = context.asset_key.to_user_string()
+
+    with duckdb.get_connection() as conn:
+        try:
+            from_date: datetime.date = conn.execute(
+                f"""
+                select
+                    max(fecha)
+                from 'main.{asset_name}';
+                """
+            ).fetchall()[0][0]
+
+            from_date = from_date + datetime.timedelta(days=1)
+        except CatalogException:
+            from_date = AEMET_API_FIRST_DAY
+
     to_date = datetime.date.today() - datetime.timedelta(days=1)
 
-    context.log.info(f"Getting data from {from_date} to {to_date}")
+    context.log.info(f"Missing data range: {from_date} to {to_date}")
+
+    if from_date >= to_date:
+        context.log.info("Data is up to date")
+        return dg.MaterializeResult()
 
     df = pl.DataFrame(aemet_api.get_weather_data(from_date, to_date))
 
-    return df
+    context.log.info(f"Inserting latest data into main.{asset_name}")
+    context.log.info(f"Data shape: {df.shape}")
 
-    # AEMET_API_FIRST_DAY = datetime.datetime(1920, 1, 1).date()
-    # asset_name = context.asset_key.to_user_string()
+    with duckdb.get_connection() as conn:
+        query = f"create or replace table 'main.{asset_name}' as select * from df"
 
-    # with duckdb.get_connection() as conn:
-    #     try:
-    #         from_date = conn.execute(
-    #             f"""
-    #             select
-    #                 max(fecha)
-    #             from 'main.{asset_name}';
-    #             """
-    #         ).fetchall()[0][0]
+        if from_date != AEMET_API_FIRST_DAY:
+            query = query + f" union all select * from 'main.{asset_name}'"
 
-    #         from_date = from_date + datetime.timedelta(days=1)
-    #     except CatalogException:
-    #         from_date = AEMET_API_FIRST_DAY
+        conn.execute(query)
 
-    # to_date = datetime.date.today() - datetime.timedelta(days=1)
-
-    # context.log.info(f"Data missing range: {from_date} to {to_date}")
-
-    # if from_date >= to_date:
-    #     context.log.info("No data to insert")
-    #     return dg.MaterializeResult()
-
-    # r = aemet_api.get_weather_data(from_date, to_date)
-
-    # df = pl.DataFrame()
-    # for d in r:
-    #     ndf = pl.DataFrame(d)
-    #     df = pl.concat([df, ndf], how="diagonal_relaxed")
-
-    # if df.shape[0] == 0:
-    #     context.log.info("No data to insert")
-    #     return dg.MaterializeResult()
-
-    # df = df.with_columns(pl.col("fecha").str.strptime(pl.Date, format="%Y-%m-%d"))
-
-    # float_columns = [
-    #     "prec",
-    #     "presMax",
-    #     "presMin",
-    #     "racha",
-    #     "sol",
-    #     "tmax",
-    #     "tmed",
-    #     "tmin",
-    #     "velmedia",
-    # ]
-
-    # df = df.with_columns(
-    #     [
-    #         pl.col(col).str.replace(",", ".").cast(pl.Float64, strict=False)
-    #         for col in float_columns
-    #     ]
-    # )
-
-    # context.log.info(f"Inserting latest data into main.{asset_name}")
-
-    # with duckdb.get_connection() as conn:
-    #     query = f"create or replace table 'main.{asset_name}' as select * from df"
-
-    #     print(from_date, AEMET_API_FIRST_DAY)
-    #     if from_date != AEMET_API_FIRST_DAY:
-    #         query = query + f" union all select * from 'main.{asset_name}'"
-
-    #     conn.execute(query)
-
-    # return dg.MaterializeResult()
+    return dg.MaterializeResult()

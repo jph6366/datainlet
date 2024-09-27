@@ -49,8 +49,7 @@ class AEMETAPI(dg.ConfigurableResource):
 
         return data
 
-    def get_weather_data(
-        self, start_date: datetime.date, end_date: datetime.date):
+    def get_weather_data(self, start_date: datetime.date, end_date: datetime.date):
         start_date_str = start_date.strftime("%Y-%m-01") + "T00:00:00UTC"
         end_date_str = end_date.strftime("%Y-%m-01") + "T00:00:00UTC"
 
