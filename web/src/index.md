@@ -27,5 +27,6 @@ Algunos recursos que pueden ser de utilidad relacionados con datos abiertos y tr
 - [ESRI](https://opendata.esri.es/search?collection=Dataset).
 - [Datadista](https://www.datadista.com/).
 - [Newtral](https://transparentia.newtral.es/buscador).
-- [Spanish Origin Destination Data](https://github.com/rOpenSpain/spanishoddata)
+- [Spanish Origin Destination Data](https://github.com/rOpenSpain/spanishoddata).
 - [DataMarket](https://github.com/Data-Market).
+- [Eurostat](https://ec.europa.eu/eurostat/data/database). Existe una librería en [R](https://github.com/rOpenGov/eurostat).
