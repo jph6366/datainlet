@@ -13,6 +13,7 @@ Gracias a la colaboración de la comunidad, datania ofrece una variedad de conju
 
 - [IPC](/datasets/ipc)
 - [Hipotecas](/datasets/hipotecas)
+- [Embalses](/datasets/embalses)
 
 ## Recursos
 
