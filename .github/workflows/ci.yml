@@ -45,6 +45,7 @@ jobs:
           file: data/database.duckdb
           asset_name: datania.duckdb
           overwrite: true
+          release_name: ${{ steps.date.outputs.date }}
 
   # Build and upload the website
   upload:
