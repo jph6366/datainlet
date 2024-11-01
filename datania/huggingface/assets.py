@@ -1,7 +1,7 @@
 import polars as pl
 from dagster import AssetIn, asset
 
-from datalia.huggingface.resources import HuggingFaceDatasetPublisher
+from datania.huggingface.resources import HuggingFaceDatasetPublisher
 
 
 def create_hf_asset(dataset_name: str):
@@ -17,7 +17,7 @@ license: mit
 ---
 # {dataset_name}
 
-Este conjunto de datos ha sido producido y publicado automáticamente por [Datalia](https://github.com/davidgasquez/datalia), una plataforma de datos abiertos moderna.
+Este conjunto de datos ha sido producido y publicado automáticamente por [datania](https://github.com/davidgasquez/datania), una plataforma de datos abiertos moderna.
 
 ## Detalles del Conjunto de Datos
 

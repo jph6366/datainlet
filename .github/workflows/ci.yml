@@ -13,6 +13,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+
   # Run the ETL pipeline
   run:
     name: Run
@@ -42,8 +43,9 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ steps.date.outputs.date }}
           file: data/database.duckdb
-          asset_name: datalia.duckdb
+          asset_name: datania.duckdb
           overwrite: true
+
   # Build and upload the website
   upload:
     name: Upload Page

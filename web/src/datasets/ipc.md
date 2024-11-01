@@ -1,7 +1,7 @@
 ---
 header: >
   <nav>
-    <a href="/">Datalia</a>
+    <a href="/">datania</a>
   </nav>
 ---
 # IPC

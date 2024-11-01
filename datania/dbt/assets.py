@@ -1,7 +1,7 @@
 import dagster as dg
 from dagster_dbt import DbtCliResource, dbt_assets
 
-from datalia.dbt.resources import dbt_project
+from datania.dbt.resources import dbt_project
 
 
 @dbt_assets(manifest=dbt_project.manifest_path)

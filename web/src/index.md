@@ -5,11 +5,11 @@
 
 ---
 
-Datalia es una plataforma de datos abiertos a nivel de España con el objetivo de unificar y armonizar información proveniente de diferentes fuentes.
+datania es una plataforma de datos abiertos a nivel de España con el objetivo de unificar y armonizar información proveniente de diferentes fuentes.
 
 ## Datasets
 
-Gracias a la colaboración de la comunidad, Datalia ofrece una variedad de conjuntos de datos. A continuación, se muestran algunos de los conjuntos de datos disponibles.
+Gracias a la colaboración de la comunidad, datania ofrece una variedad de conjuntos de datos. A continuación, se muestran algunos de los conjuntos de datos disponibles.
 
 - [IPC](/datasets/ipc)
 

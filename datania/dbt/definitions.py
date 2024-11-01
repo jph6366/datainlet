@@ -1,7 +1,7 @@
 import dagster as dg
 
-from datalia.dbt import assets
-from datalia.dbt.resources import dbt_resource
+from datania.dbt import assets
+from datania.dbt.resources import dbt_resource
 
 aemet_assets = dg.load_assets_from_modules([assets])
 

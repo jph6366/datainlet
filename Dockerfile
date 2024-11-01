@@ -7,7 +7,7 @@ USER user
 ENV HOME=/home/user \
     PATH=/home/user/.local/bin:$PATH
 
-COPY --chown=user datalia/ $HOME/app/datalia/
+COPY --chown=user datania/ $HOME/app/datania/
 COPY --chown=user dbt/ $HOME/app/dbt/
 COPY --chown=user Makefile pyproject.toml uv.lock $HOME/app/
 

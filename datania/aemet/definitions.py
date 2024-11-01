@@ -1,8 +1,8 @@
 import dagster as dg
 
-from datalia.aemet import assets
-from datalia.aemet.resources import AEMETAPI
-from datalia.resources import duckdb_resource
+from datania.aemet import assets
+from datania.aemet.resources import AEMETAPI
+from datania.resources import duckdb_resource
 
 aemet_assets = dg.load_assets_from_modules([assets])
 

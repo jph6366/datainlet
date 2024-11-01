@@ -1,5 +1,5 @@
 [project]
-name = "datalia"
+name = "datania"
 version = "1.0.0"
 description = "Add your description here"
 readme = "README.md"
@@ -20,11 +20,11 @@ dependencies = [
 ]
 
 [tool.setuptools]
-packages = ["datalia"]
+packages = ["datania"]
 
 [tool.dagster]
-module_name = "datalia.definitions"
-code_location_name = "datalia"
+module_name = "datania.definitions"
+code_location_name = "datania"
 
 [tool.uv]
 dev-dependencies = ["dagster-webserver>=1.8.6"]

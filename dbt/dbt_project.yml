@@ -1,4 +1,4 @@
-name: "datalia"
+name: "datania"
 version: "1.0.0"
 
 profile: "default"
@@ -8,5 +8,5 @@ clean-targets:
   - "dbt_packages"
 
 models:
-  datalia:
+  datania:
     +materialized: table

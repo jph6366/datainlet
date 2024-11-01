@@ -1,11 +1,11 @@
 .DEFAULT_GOAL := run
 
 db:
-	wget https://github.com/davidgasquez/datalia/releases/latest/download/datalia.duckdb -O data/database.duckdb
+	wget https://github.com/davidgasquez/datania/releases/latest/download/datania.duckdb -O data/database.duckdb
 
 run:
-	uv run dagster-dbt project prepare-and-package --file datalia/dbt/resources.py
-	uv run dagster asset materialize --select \* -m datalia.definitions
+	uv run dagster-dbt project prepare-and-package --file datania/dbt/resources.py
+	uv run dagster asset materialize --select \* -m datania.definitions
 
 dev:
 	uv run dagster dev

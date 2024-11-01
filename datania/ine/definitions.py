@@ -1,7 +1,7 @@
 import dagster as dg
 
-from datalia.ine import assets
-from datalia.resources import io_manager
+from datania.ine import assets
+from datania.resources import io_manager
 
 ine_assets = dg.load_assets_from_modules([assets])
 

@@ -1,5 +1,5 @@
 export default {
-  title: "Datalia",
+  title: "datania",
   head: '<link rel="icon" href="favicon.png" type="image/png">',
   root: "src",
   theme: ["air"],

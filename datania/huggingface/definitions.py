@@ -1,7 +1,7 @@
 import dagster as dg
 
-from datalia.huggingface.assets import assets
-from datalia.huggingface.resources import HuggingFaceDatasetPublisher
+from datania.huggingface.assets import assets
+from datania.huggingface.resources import HuggingFaceDatasetPublisher
 
 definitions = dg.Definitions(
     assets=assets,

@@ -5,7 +5,7 @@ import polars as pl
 from dagster_duckdb import DuckDBResource
 from duckdb import CatalogException
 
-from datalia.aemet.resources import AEMETAPI
+from datania.aemet.resources import AEMETAPI
 
 
 @dg.asset()
