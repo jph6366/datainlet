@@ -12,6 +12,7 @@ datania es una plataforma de datos abiertos a nivel de España con el objetivo d
 Gracias a la colaboración de la comunidad, datania ofrece una variedad de conjuntos de datos. A continuación, se muestran algunos de los conjuntos de datos disponibles.
 
 - [IPC](/datasets/ipc)
+- [Hipotecas](/datasets/hipotecas)
 
 ## Recursos
 
