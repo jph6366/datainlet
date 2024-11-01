@@ -14,7 +14,7 @@ _Última actualización:  ${new Date(now).toLocaleDateString()}_
 </div>
 <div class="card">
 
-_💾 [Descargar](https://huggingface.co/datasets/davidgasquez/ipc)_
+_💾 [Descargar](https://huggingface.co/datasets/datania/ipc)_
 
 </div>
 </div>
@@ -39,7 +39,7 @@ Datos extraídos de INE (Instituto Nacional de Estadística).
 ## Explorador
 
 <iframe
-  src="https://huggingface.co/datasets/davidgasquez/ipc/embed/viewer/default/train"
+  src="https://huggingface.co/datasets/datania/ipc/embed/viewer/default/train"
   frameborder="0"
   width="100%"
   height="560px"

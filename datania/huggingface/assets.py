@@ -36,7 +36,7 @@ Este conjunto de datos ha sido producido y publicado automáticamente por [datan
     return hf_asset
 
 
-datasets = ["ipc"]
+datasets = ["ipc", "hipotecas"]
 
 assets = []
 for dataset in datasets:

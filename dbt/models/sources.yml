@@ -7,3 +7,7 @@ sources:
         meta:
           dagster:
             asset_key: ["raw_ipc"]
+      - name: raw_hipotecas
+        meta:
+          dagster:
+            asset_key: ["raw_hipotecas"]
