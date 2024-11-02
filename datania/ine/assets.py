@@ -20,7 +20,7 @@ def raw_ipc() -> pl.DataFrame:
 @dg.asset()
 def raw_hipotecas() -> pl.DataFrame:
     """
-    Datos de la serie histórica de hipotecas constituidas en España en formato CSV.
+    Datos de la serie histórica de Hipotecas constituidas sobre el total de fincas por naturaleza de la finca.
 
     Fuente: https://www.ine.es/dynt3/inebase/es/index.htm?padre=1043
     """

@@ -7,6 +7,12 @@ on:
   schedule:
     - cron: 0 0 * * 0
   workflow_dispatch:
+    inputs:
+      upload_db:
+        description: 'Upload database to release'
+        required: true
+        type: boolean
+        default: false
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -37,7 +43,7 @@ jobs:
         id: date
         run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
       - name: Upload database to release
-        if: github.event_name == 'schedule'
+        if: github.event_name == 'schedule' && inputs.upload_db == true
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
