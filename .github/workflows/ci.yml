@@ -43,7 +43,7 @@ jobs:
         id: date
         run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
       - name: Upload database to release
-        if: github.event_name == 'schedule' && inputs.upload_db == true
+        if: github.event_name == 'schedule' || inputs.upload_db == true
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
