@@ -4,11 +4,10 @@ with source as (
 
 renamed as (
     select
-        periodo as fecha,
-        provincias as provincia,
-        naturaleza_de_la_finca as tipo_finca,
-        numero_de_hipotecas,
-        importe_de_hipotecas
+        Periodo as fecha,
+        Provincias as provincia,
+        "Tabla y Variable" as variable,
+        Total as valor
     from source
 ),
 
@@ -16,9 +15,8 @@ cleaned as (
     select
         fecha,
         provincia,
-        tipo_finca,
-        numero_de_hipotecas,
-        importe_de_hipotecas
+        variable,
+        valor
     from renamed
     order by fecha desc
 )
