@@ -7,7 +7,7 @@ import dagster as dg
 
 
 @dg.asset(retry_policy=dg.RetryPolicy(max_retries=3))
-async def raw_energy_demand_data() -> pl.DataFrame:
+async def raw_demanda_energia_electrica() -> pl.DataFrame:
     """Recolecta datos de demanda de energía eléctrica en España."""
     start_date = datetime(2014, 1, 1)
     end_date = datetime.now() - timedelta(days=1)

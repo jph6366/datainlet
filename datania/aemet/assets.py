@@ -9,7 +9,7 @@ from datania.aemet.resources import AEMETAPI
 
 
 @dg.asset()
-def raw_aemet_stations(aemet_api: AEMETAPI) -> pl.DataFrame:
+def raw_estaciones_aemet(aemet_api: AEMETAPI) -> pl.DataFrame:
     """
     Datos de las estaciones meteorológicas de AEMET.
     """
@@ -18,12 +18,12 @@ def raw_aemet_stations(aemet_api: AEMETAPI) -> pl.DataFrame:
 
 
 @dg.asset()
-def aemet_stations(raw_aemet_stations: pl.DataFrame) -> pl.DataFrame:
+def estaciones_aemet(raw_estaciones_aemet: pl.DataFrame) -> pl.DataFrame:
     """
     Datos de las estaciones meteorológicas de AEMET procesados.
     """
 
-    raw_aemet_stations.with_columns(
+    df = raw_estaciones_aemet.with_columns(
         pl.col("indsinop").cast(pl.Int32, strict=False).alias("indsinop")
     )
 
@@ -37,7 +37,7 @@ def aemet_stations(raw_aemet_stations: pl.DataFrame) -> pl.DataFrame:
             decimal = -decimal
         return decimal
 
-    df = raw_aemet_stations.with_columns(
+    df = raw_estaciones_aemet.with_columns(
         [
             pl.col("latitud").map_elements(convert_to_decimal).alias("latitud"),
             pl.col("longitud").map_elements(convert_to_decimal).alias("longitud"),
@@ -48,7 +48,7 @@ def aemet_stations(raw_aemet_stations: pl.DataFrame) -> pl.DataFrame:
 
 
 @dg.asset()
-def raw_aemet_stations_weather(
+def raw_datos_meteorologicos_estaciones_aemet(
     context: dg.AssetExecutionContext,
     duckdb: DuckDBResource,
     aemet_api: AEMETAPI,

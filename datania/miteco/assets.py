@@ -6,7 +6,7 @@ from datania.miteco.resources import MITECOArcGisAPI
 
 
 @dg.asset()
-def raw_spain_water_reservoirs_data(
+def raw_embalses(
     context: dg.AssetExecutionContext, miteco_api: MITECOArcGisAPI
 ) -> pl.DataFrame:
     """

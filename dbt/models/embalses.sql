@@ -1,5 +1,5 @@
 with source as (
-    select * from {{ source('main', 'raw_spain_water_reservoirs_data') }}
+    select * from {{ source('main', 'raw_embalses') }}
 ),
 
 renamed as (

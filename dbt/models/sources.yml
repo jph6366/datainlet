@@ -15,7 +15,7 @@ sources:
         meta:
           dagster:
             asset_key: ["raw_hipotecas_indicadores_nacionales"]
-      - name: raw_spain_water_reservoirs_data
+      - name: raw_embalses
         meta:
           dagster:
-            asset_key: ["raw_spain_water_reservoirs_data"]
+            asset_key: ["raw_embalses"]
