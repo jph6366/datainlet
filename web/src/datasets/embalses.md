@@ -1,7 +1,7 @@
 ---
 header: >
   <nav>
-    <a href="/">datania</a>
+    <a href="/">Datania</a>
   </nav>
 ---
 # Embalses

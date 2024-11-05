@@ -7,10 +7,14 @@ sources:
         meta:
           dagster:
             asset_key: ["raw_ipc"]
-      - name: raw_hipotecas
+      - name: raw_hipotecas_indicadores_por_provincia
         meta:
           dagster:
-            asset_key: ["raw_hipotecas"]
+            asset_key: ["raw_hipotecas_indicadores_por_provincia"]
+      - name: raw_hipotecas_indicadores_nacionales
+        meta:
+          dagster:
+            asset_key: ["raw_hipotecas_indicadores_nacionales"]
       - name: raw_spain_water_reservoirs_data
         meta:
           dagster:

@@ -18,9 +18,9 @@ def raw_ipc() -> pl.DataFrame:
 
 
 @dg.asset()
-def raw_hipotecas() -> pl.DataFrame:
+def raw_hipotecas_indicadores_por_provincia() -> pl.DataFrame:
     """
-    Datos de la serie histórica de Hipotecas en España.
+    Datos de la serie histórica de Hipotecas en España a nivel de provincia.
 
     Fuente: https://www.ine.es/dynt3/inebase/es/index.htm?padre=1043
     """
@@ -115,5 +115,76 @@ def raw_hipotecas() -> pl.DataFrame:
     #     index=["Provincias", "Periodo"],
     #     values="Total"
     # )
+
+    return combined_df
+
+
+@dg.asset()
+def raw_hipotecas_indicadores_nacionales() -> pl.DataFrame:
+    """
+    Datos de la serie de indicadores nacionales de Hipotecas en España.
+    """
+
+    BASE_URL = "https://www.ine.es/jaxiT3/files/t/es/csv_bdsc/"
+
+    resultados_urls = [
+        {
+            "id": 24456,
+            "name": "Porcentaje de hipotecas constituidas según tipo de interés",
+        },
+        {
+            "id": 24457,
+            "name": "Tipo de interés medio al inicio de las hipotecas constituidas",
+        },
+        {
+            "id": 24458,
+            "name": "Plazo medio de las hipotecas constituidas",
+        },
+    ]
+
+    dfs = [
+        pl.read_csv(
+            BASE_URL + f"{resultado['id']}.csv",
+            truncate_ragged_lines=True,
+            separator=";",
+            infer_schema_length=None,
+        )
+        for resultado in resultados_urls
+    ]
+
+    dfs = [
+        df.with_columns(pl.lit(resultado["name"]).alias("Tabla"))
+        for df, resultado in zip(dfs, resultados_urls)
+    ]
+
+    common_columns = set(["Periodo", "Total"])
+
+    processed_dfs = [
+        df.with_columns(
+            pl.concat_str(
+                [pl.col(i) for i in df.columns if i not in common_columns],
+                separator=" - ",
+            ).alias("Variable"),
+            pl.col("Total").cast(pl.String),
+        ).drop(list(set(df.columns) - common_columns))
+        for df in dfs
+    ]
+
+    # Concatenate all processed dataframes vertically
+    combined_df = pl.concat(processed_dfs)
+
+    combined_df = combined_df.with_columns(
+        pl.col("Total")
+        .str.replace_all(r"\.", "")
+        .str.replace_all(",", ".")
+        .cast(pl.Float64)
+    )
+
+    combined_df = combined_df.with_columns(
+        pl.col("Periodo")
+        .str.replace("M", "-")
+        .alias("Periodo")
+        .str.strptime(pl.Date, "%Y-%m")
+    )
 
     return combined_df

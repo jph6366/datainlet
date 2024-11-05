@@ -1,24 +1,21 @@
-with source as (
-    select * from {{ source('main', 'raw_hipotecas') }}
+with indicadores_nacionales as (
+    select
+        'Total Nacional' as provincia,
+        Periodo as fecha,
+        Variable as variable,
+        Total as valor
+    from {{ source('main', 'raw_hipotecas_indicadores_nacionales') }}
 ),
 
-renamed as (
+indicadores_por_provincia as (
     select
         Periodo as fecha,
         Provincias as provincia,
         "Tabla y Variable" as variable,
         Total as valor
-    from source
-),
-
-cleaned as (
-    select
-        fecha,
-        provincia,
-        variable,
-        valor
-    from renamed
-    order by fecha desc
+    from {{ source('main', 'raw_hipotecas_indicadores_por_provincia') }}
 )
 
-select * from cleaned order by fecha desc
+select * from indicadores_nacionales
+union all
+select * from indicadores_por_provincia
