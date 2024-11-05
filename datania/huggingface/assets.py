@@ -36,7 +36,13 @@ Este conjunto de datos ha sido producido y publicado automáticamente por [datan
     return hf_asset
 
 
-datasets = ["ipc", "hipotecas", "embalses", "estaciones_aemet"]
+datasets = [
+    "ipc",
+    "hipotecas",
+    "embalses",
+    "estaciones_aemet",
+    "demanda_energia_electrica",
+]
 
 assets = []
 for dataset in datasets:

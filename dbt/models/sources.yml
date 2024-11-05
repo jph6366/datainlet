@@ -19,3 +19,7 @@ sources:
         meta:
           dagster:
             asset_key: ["raw_embalses"]
+      - name: raw_demanda_energia_electrica
+        meta:
+          dagster:
+            asset_key: ["raw_demanda_energia_electrica"]
