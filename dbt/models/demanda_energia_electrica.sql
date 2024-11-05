@@ -8,6 +8,6 @@ renamed as (
         value,
         percentage
     from source
-),
+)
 
 select * from renamed order by datetime desc
