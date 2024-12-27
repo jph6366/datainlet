@@ -1,6 +1,6 @@
+import dagster as dg
 import httpx
 from tenacity import retry, stop_after_attempt, wait_exponential
-import dagster as dg
 
 
 class MITECOArcGisAPI(dg.ConfigurableResource):
