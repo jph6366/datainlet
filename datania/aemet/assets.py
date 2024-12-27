@@ -52,7 +52,7 @@ def raw_datos_meteorologicos_estaciones_aemet(
     context: dg.AssetExecutionContext,
     duckdb: DuckDBResource,
     aemet_api: AEMETAPI,
-) -> dg.MaterializeResult:
+) -> pl.DataFrame:
     """
     Datos meteorológicos de AEMET de todas las estaciones meteorológicas en España desde 1920.
     """
@@ -63,15 +63,16 @@ def raw_datos_meteorologicos_estaciones_aemet(
 
     with duckdb.get_connection() as conn:
         try:
-            from_date: datetime.date = conn.execute(
+            df = conn.execute(
                 f"""
                 select
-                    max(fecha)
+                    *
                 from 'main.{asset_name}';
                 """
-            ).fetchall()[0][0]
-
-            from_date = from_date + datetime.timedelta(days=1)
+            ).pl()
+            from_date = (
+                df.select(pl.col("fecha").str.to_date().max()).to_series().to_list()[0]
+            )
         except CatalogException:
             from_date = AEMET_API_FIRST_DAY
 
@@ -81,19 +82,21 @@ def raw_datos_meteorologicos_estaciones_aemet(
 
     if from_date >= to_date:
         context.log.info("Data is up to date")
-        return dg.MaterializeResult()
+        return df
 
     df = pl.DataFrame(aemet_api.get_weather_data(from_date, to_date))
 
-    context.log.info(f"Inserting latest data into main.{asset_name}")
-    context.log.info(f"Data shape: {df.shape}")
+    return df
 
-    with duckdb.get_connection() as conn:
-        query = f"create or replace table 'main.{asset_name}' as select * from df"
 
-        if from_date != AEMET_API_FIRST_DAY:
-            query = query + f" union all select * from 'main.{asset_name}'"
+@dg.asset()
+def datos_meteorologicos_estaciones_aemet(
+    raw_datos_meteorologicos_estaciones_aemet: pl.DataFrame,
+) -> pl.DataFrame:
+    """
+    Datos meteorológicos de AEMET de todas las estaciones meteorológicas en España desde 1920.
+    """
 
-        conn.execute(query)
-
-    return dg.MaterializeResult()
+    return raw_datos_meteorologicos_estaciones_aemet.with_columns(
+        pl.col("fecha").str.to_date().alias("fecha"),
+    )
