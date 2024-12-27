@@ -1,9 +1,8 @@
 import datetime
+import os
 
 import dagster as dg
 import polars as pl
-from dagster_duckdb import DuckDBResource
-from duckdb import CatalogException
 
 from datania.aemet.resources import AEMETAPI
 
@@ -20,12 +19,8 @@ def raw_estaciones_aemet(aemet_api: AEMETAPI) -> pl.DataFrame:
 @dg.asset()
 def estaciones_aemet(raw_estaciones_aemet: pl.DataFrame) -> pl.DataFrame:
     """
-    Datos de las estaciones meteorológicas de AEMET procesados.
+    Datos procesados de las estaciones meteorológicas de AEMET.
     """
-
-    df = raw_estaciones_aemet.with_columns(
-        pl.col("indsinop").cast(pl.Int32, strict=False).alias("indsinop")
-    )
 
     # Clean latitud and longitud
     def convert_to_decimal(coord):
@@ -42,6 +37,15 @@ def estaciones_aemet(raw_estaciones_aemet: pl.DataFrame) -> pl.DataFrame:
             pl.col("latitud").map_elements(convert_to_decimal).alias("latitud"),
             pl.col("longitud").map_elements(convert_to_decimal).alias("longitud"),
         ]
+    ).select(
+        pl.col("latitud"),
+        pl.col("longitud"),
+        pl.col("provincia"),
+        pl.col("indicativo"),
+        pl.col("nombre"),
+        pl.col("indsinop")
+        .map_elements(lambda x: None if x == "" else x, return_dtype=pl.String)
+        .alias("indicativo_sinoptico"),
     )
 
     return df
@@ -50,41 +54,23 @@ def estaciones_aemet(raw_estaciones_aemet: pl.DataFrame) -> pl.DataFrame:
 @dg.asset()
 def raw_datos_meteorologicos_estaciones_aemet(
     context: dg.AssetExecutionContext,
-    duckdb: DuckDBResource,
     aemet_api: AEMETAPI,
 ) -> pl.DataFrame:
     """
     Datos meteorológicos de AEMET de todas las estaciones meteorológicas en España desde 1920.
     """
-
-    AEMET_API_FIRST_DAY = datetime.datetime(1920, 1, 1).date()
-
-    with duckdb.get_connection() as conn:
-        try:
-            df = conn.execute(
-                """
-                select
-                    *
-                from 'https://huggingface.co/datasets/datania/datos_meteorologicos_estaciones_aemet/resolve/main/data/datos_meteorologicos_estaciones_aemet.parquet';
-                """
-            ).pl()
-            from_date = df.select(pl.col("fecha").max()).to_series().to_list()[0]
-        except CatalogException:
-            from_date = AEMET_API_FIRST_DAY
+    if os.getenv("ENVIRONMENT") == "production":
+        from_date = datetime.datetime(1920, 1, 1).date()
+    else:
+        from_date = datetime.date.today() - datetime.timedelta(days=15)
 
     to_date = datetime.date.today() - datetime.timedelta(days=1)
+    context.log.info(f"Fetching data from {from_date} to {to_date}")
 
-    context.log.info(f"Missing data range: {from_date} to {to_date}")
+    df = pl.DataFrame(aemet_api.get_weather_data(from_date, to_date))
+    df = df.with_columns(pl.col("fecha").str.to_date().alias("fecha"))
 
-    if from_date >= to_date:
-        context.log.info("Data is up to date")
-        return df
-
-    updated_df = pl.DataFrame(aemet_api.get_weather_data(from_date, to_date))
-
-    updated_df = updated_df.with_columns(pl.col("fecha").str.to_date().alias("fecha"))
-
-    return pl.concat([df, updated_df], how="diagonal_relaxed")
+    return df
 
 
 @dg.asset()
@@ -92,7 +78,7 @@ def datos_meteorologicos_estaciones_aemet(
     raw_datos_meteorologicos_estaciones_aemet: pl.DataFrame,
 ) -> pl.DataFrame:
     """
-    Datos meteorológicos de AEMET de todas las estaciones meteorológicas en España desde 1920.
+    Datos meteorológicos procesados de AEMET de todas las estaciones meteorológicas en España desde 1920.
     """
 
     return raw_datos_meteorologicos_estaciones_aemet.with_columns(

@@ -1,3 +1,5 @@
+import os
+
 import polars as pl
 from dagster import AssetIn, asset
 
@@ -25,13 +27,16 @@ Este conjunto de datos ha sido producido y publicado automáticamente por [datan
 - **Número de columnas:** {data.shape[1]}
         """
 
-        dp.publish(
-            dataset=data,
-            dataset_name=dataset_name,
-            username="datania",
-            readme=readme_content,
-            generate_datapackage=True,
-        )
+        if os.getenv("ENVIRONMENT") == "production":
+            dp.publish(
+                dataset=data,
+                dataset_name=dataset_name,
+                username="datania",
+                readme=readme_content,
+                generate_datapackage=True,
+            )
+        else:
+            return
 
     return hf_asset
 

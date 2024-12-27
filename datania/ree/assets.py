@@ -46,3 +46,14 @@ async def raw_demanda_energia_electrica() -> pl.DataFrame:
             pl.col("value").cast(pl.Float64),
         ]
     )
+
+
+@dg.asset()
+def demanda_energia_electrica(
+    raw_demanda_energia_electrica: pl.DataFrame,
+) -> pl.DataFrame:
+    """
+    Datos procesados de la demanda de energía eléctrica en España.
+    """
+
+    return raw_demanda_energia_electrica

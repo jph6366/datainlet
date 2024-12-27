@@ -66,9 +66,7 @@ Puedes definir estas variables en un archivo `.env` en la raíz del proyecto o c
 Datania está compuesta por varios componentes:
 
 - **Dagster**: Una herramienta que orquesta los pipelines de datos.
-- **DuckDB**: Una base de datos en memoria para almacenar los datos.
-- **dbt**: Una herramienta de transformación de datos con SQL.
-- **Observable Framework**: Un generador de páginas web estáticas con el que publicamos la web.
+- **DuckDB y Polars**: Base de datos y librería de procesamiento de datos.
 - **HuggingFace**: Plataforma donde publicamos los datasets.
 
 ## 📄 Licencia

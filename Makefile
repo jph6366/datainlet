@@ -4,7 +4,6 @@ db:
 	wget https://github.com/davidgasquez/datania/releases/latest/download/datania.duckdb -O data/database.duckdb
 
 run:
-	uv run dagster-dbt project prepare-and-package --file datania/dbt/resources.py
 	uv run dagster asset materialize --select \* -m datania.definitions
 
 dev:
@@ -20,4 +19,3 @@ setup:
 
 clean:
 	rm -rf data/*.parquet data/*.duckdb
-	rm -rf dbt/target dbt/dbt_packages dbt/logs

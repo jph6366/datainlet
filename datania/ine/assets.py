@@ -18,6 +18,34 @@ def raw_ipc() -> pl.DataFrame:
 
 
 @dg.asset()
+def ipc(raw_ipc: pl.DataFrame) -> pl.DataFrame:
+    """
+    Datos procesados del Índice de Precios de Consumo (IPC) en España.
+    """
+
+    df = raw_ipc.select(
+        pl.col("Clases").alias("clase"),
+        pl.col("Tipo de dato").alias("tipo_de_dato"),
+        pl.col("Periodo").alias("fecha"),
+        pl.col("Total").alias("value"),
+    )
+
+    df = df.with_columns(
+        [
+            pl.col("value").cast(pl.Float64, strict=False).alias("value"),
+            pl.col("fecha")
+            .str.replace("M", "-")
+            .str.strptime(pl.Date, format="%Y-%m")
+            .alias("fecha"),
+        ]
+    )
+
+    df = df.filter(pl.col("tipo_de_dato") == "Índice").drop("tipo_de_dato")
+
+    return df
+
+
+@dg.asset()
 def raw_hipotecas_indicadores_por_provincia() -> pl.DataFrame:
     """
     Datos de la serie histórica de Hipotecas en España a nivel de provincia.
@@ -109,13 +137,6 @@ def raw_hipotecas_indicadores_por_provincia() -> pl.DataFrame:
         .str.strptime(pl.Date, "%Y-%m")
     )
 
-    # If we want to pivot the dataframe to have a column for each variable (wide format)
-    # df = combined_df.pivot(
-    #     on="Tabla y Variable",
-    #     index=["Provincias", "Periodo"],
-    #     values="Total"
-    # )
-
     return combined_df
 
 
@@ -188,3 +209,33 @@ def raw_hipotecas_indicadores_nacionales() -> pl.DataFrame:
     )
 
     return combined_df
+
+
+@dg.asset()
+def hipotecas(
+    raw_hipotecas_indicadores_nacionales: pl.DataFrame,
+    raw_hipotecas_indicadores_por_provincia: pl.DataFrame,
+) -> pl.DataFrame:
+    """
+    Datos procesados de Hipotecas en España.
+    """
+
+    indicadores_nacionales = raw_hipotecas_indicadores_nacionales.select(
+        pl.col("Periodo").alias("fecha"),
+        pl.lit("Total Nacional").alias("provincia"),
+        pl.col("Variable").alias("variable"),
+        pl.col("Total").alias("valor"),
+    )
+
+    indicadores_por_provincia = raw_hipotecas_indicadores_por_provincia.select(
+        pl.col("Periodo").alias("fecha"),
+        pl.col("Provincias").alias("provincia"),
+        pl.col("Tabla y Variable").alias("variable"),
+        pl.col("Total").alias("valor"),
+    )
+
+    df = pl.concat(
+        [indicadores_nacionales, indicadores_por_provincia], how="vertical_relaxed"
+    )
+
+    return df
