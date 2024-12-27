@@ -16,6 +16,9 @@ Estos son los conjuntos de datos disponibles:
 - [IPC](/datasets/ipc)
 - [Hipotecas](/datasets/hipotecas)
 - [Embalses](/datasets/embalses)
+- [Datos Meteorológicos AEMET](/datasets/datos_meteorologicos_estaciones_aemet)
+- [Demanda de Energía Eléctrica](/datasets/demanda_energia_electrica)
+- [Estaciones de AEMET](/datasets/estaciones_aemet)
 
 ## Recursos
 
