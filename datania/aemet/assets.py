@@ -59,20 +59,16 @@ def raw_datos_meteorologicos_estaciones_aemet(
 
     AEMET_API_FIRST_DAY = datetime.datetime(1920, 1, 1).date()
 
-    asset_name = context.asset_key.to_user_string()
-
     with duckdb.get_connection() as conn:
         try:
             df = conn.execute(
-                f"""
+                """
                 select
                     *
-                from 'main.{asset_name}';
+                from 'https://huggingface.co/datasets/datania/datos_meteorologicos_estaciones_aemet/resolve/main/data/datos_meteorologicos_estaciones_aemet.parquet';
                 """
             ).pl()
-            from_date = (
-                df.select(pl.col("fecha").str.to_date().max()).to_series().to_list()[0]
-            )
+            from_date = df.select(pl.col("fecha").max()).to_series().to_list()[0]
         except CatalogException:
             from_date = AEMET_API_FIRST_DAY
 
@@ -84,9 +80,11 @@ def raw_datos_meteorologicos_estaciones_aemet(
         context.log.info("Data is up to date")
         return df
 
-    df = pl.DataFrame(aemet_api.get_weather_data(from_date, to_date))
+    updated_df = pl.DataFrame(aemet_api.get_weather_data(from_date, to_date))
 
-    return df
+    updated_df = updated_df.with_columns(pl.col("fecha").str.to_date().alias("fecha"))
+
+    return pl.concat([df, updated_df], how="diagonal_relaxed")
 
 
 @dg.asset()
@@ -98,5 +96,5 @@ def datos_meteorologicos_estaciones_aemet(
     """
 
     return raw_datos_meteorologicos_estaciones_aemet.with_columns(
-        pl.col("fecha").str.to_date().alias("fecha"),
+        pl.col("altitud").cast(pl.Int32, strict=False).alias("altitud")
     )

@@ -38,7 +38,6 @@ jobs:
         run: uv python install 3.12
       - name: Run
         run: |
-          make db
           make run
       - name: Get current date
         id: date
