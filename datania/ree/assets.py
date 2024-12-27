@@ -1,9 +1,9 @@
-import polars as pl
-import httpx
 import asyncio
-
 from datetime import datetime, timedelta
+
 import dagster as dg
+import httpx
+import polars as pl
 
 
 @dg.asset(retry_policy=dg.RetryPolicy(max_retries=3))
