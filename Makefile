@@ -19,7 +19,7 @@ dev: .uv
 
 .PHONY: web
 web:
-	npm run dev --prefix web
+	uv run python -m http.server 8000 --directory web
 
 clean:
 	rm -rf data/*.parquet data/*.duckdb
