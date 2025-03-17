@@ -63,7 +63,12 @@ class AEMETAPI(dg.ConfigurableResource):
 
             url = f"/valores/climatologicos/diarios/datos/fechaini/{start_date_str}/fechafin/{end_date_str}/todasestaciones"
             endpoint_response_data = self.query_endpoint(url)
-            data = self.query_datos(endpoint_response_data)
+
+            try:
+                data = self.query_datos(endpoint_response_data)
+            except Exception as e:
+                log.error(f"Error fetching data for {current_date} to {next_date}: {e}")
+                continue
 
             current_date = next_date + datetime.timedelta(days=1)
 

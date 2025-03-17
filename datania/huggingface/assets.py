@@ -47,7 +47,7 @@ datasets = [
     "embalses",
     "estaciones_aemet",
     "datos_meteorologicos_estaciones_aemet",
-    "demanda_energia_electrica",
+    # "demanda_energia_electrica",
 ]
 
 assets = []
