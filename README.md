@@ -2,7 +2,11 @@
 
 <p align="center">
   <h1 style="font-size:80px; font-weight: 800;" align="center">D A T A I S L E</h1>
+  
+   <h4 style="font-size:80px; font-weight: 800;" align="center">Making Better Land and Water Use Decisions, Protecting Natural Resources, and Planning for a Sustainable Future</h4>
+  
 </p>
+
 
 <div align="center">
   <img alt="GitHub" src="https://img.shields.io/github/license/davidgasquez/datania?style=flat-square">
@@ -12,16 +16,16 @@
 
 <br>
 
-Dataisle is a public-facing asset-centric open data platform that aims to transparently join data available to the public
+Dataisle is a priority-resilience, asset-centric open data platform that encourages heterogeneous chunks of resources and jobs to capture some understanding of the world.
 
 ## 💡 Principles
 
-Transparency : Code, standards, infrastructure, and data are public. Use open tools, standards, and infrastructure, and share data in accessible formats .
-Modularity : Each component or dataset can be replaced, extended, or removed. The code works well in many environments (a laptop, a cluster, or from the browser) and can be deployed in different locations.
-Frictionless : Don't ask, fork and improve your code, models, or add a new data source. Use datasets without API limits or quotas.
-Data as Code : Declarative transformations tracked in git. Datasets and their transformations are published so others can build on them.
-Glue : Datania is a bridge between tools and approaches, not a standard or a tool in itself. It integrates with other tools and services.
-
+- Transparency : Code, standards, infrastructure, and data are public. Use open tools, standards, and infrastructure, and share data in accessible formats .
+- Modularity : Each component or dataset can be replaced, extended, or removed. The code works well in many environments (a laptop, a cluster, or from the browser) and can be deployed in different locations.
+- Frictionless : Don't ask, fork and improve your code, models, or add a new data source. Use datasets without API limits or quotas.
+- Data as Code : Declarative transformations tracked in git. Datasets and their transformations are published so others can build on them.
+- Glue : Datania is a bridge between tools and approaches, not a standard or a tool in itself. It integrates with other tools and services.
+- Public Engagement & : 
 ## ⚙️ Configuración
 
 Si quieres contribuir, es fácil! Clona el repositorio y sigue estas instrucciones.
