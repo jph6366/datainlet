@@ -1,11 +1,8 @@
 <!-- markdownlint-disable MD033 MD041-->
 
 <p align="center">
-  <h1 style="font-size:80px; font-weight: 800;" align="center">D A T A I S L E</h1>
-  
-  
+  <h1 style="font-size:80px; font-weight: 800;" align="center">D A T A  I N L E T</h1>
 </p>
-
 
 <div align="center">
   <img alt="GitHub" src="https://img.shields.io/github/license/davidgasquez/datania?style=flat-square">
@@ -14,7 +11,7 @@
 </div>
 
 <br>
- <h4 style="font-size:80px; font-weight: 800;" align="center">Dataisle is a priority-resilience, asset-centric open data platform that encourages heterogeneous chunks of resources, jobs, and metadata to capture some understanding of land and water use for the USVI.</h4>
+ <h4 style="font-size:80px; font-weight: 800;" align="center">datainlet is a priority-resilience, asset-centric open data platform that encourages heterogeneous chunks of resources, jobs, and metadata to capture some understanding of land and water use for the USVI.</h4>
 
 ## 🌞 Principles
 
@@ -30,15 +27,13 @@
 
 - **Glue** : Datania is a bridge between tools and approaches, not a standard or a tool in itself. It integrates with other tools and services.
 
-- **[#beFAIRandCARE](https://opencontext.org/about/fair-care)** : 
+- **[#beFAIRandCARE](https://opencontext.org/about/fair-care)** :
      <h3 style="font-size:80px; font-weight: 800;" align="center"> Findability, Accessibility, Interoperability, Reuse of digital assets,</h3>
           <h3 style="font-size:80px; font-weight: 800;" align="center"> and</h3>
      <h3 style="font-size:80px; font-weight: 800;" align="center"> Collective Benefit, Authority To Control, Responsibility, Ethics </h3>
 
 - **[IOCM](https://iocm.noaa.gov/)** : Integrated Ocean and Coastal Mapping is the practice of planning, acquiring, integrating, and sharing ocean and coastal data and related products so that people who need the data can find it and use it easily:
      <h3 style="font-size:80px; font-weight: 800;" align="center">Map Once, Use Many Times.</h3>
-
-
 
 - **No vendor lock-in** :
   
@@ -55,9 +50,8 @@
 - **Coastal and Climate Resilience**: To be successful, these diverse projects require buy-in from many levels of the community: decision makers, local agency staff, homeowners, real estate professionals, and design, construction, and maintenance contractors.
 
     _From Planning to Action for Coastal Resilience:_
-    
-    _Elevating Environmental Literacy for USVI Priority Resilience Projects_
 
+    _Elevating Environmental Literacy for USVI Priority Resilience Projects_
 
 ## ⚙️ Configuration
 
@@ -69,7 +63,7 @@ Any problems you encounter, please feel free to open an issue !
 
 Install Python on your system and optionally, uv.
 
-If you have uv, you can install all dependencies inside a Python virtual environment by running make setuponce you have cloned the repository.
+If you have uv, you can install all dependencies inside a Python virtual environment by running make setup once you have cloned the repository.
 
 ```bash
 make setup
@@ -77,7 +71,7 @@ make setup
 
 If you don't want to install uv, you can use Python to create a virtual environment and install dependencies.
 
-```bash
+``` bash
 python3 -m venv .venv
 source .venv/bin/activate
 
@@ -85,7 +79,7 @@ source .venv/bin/activate
 pip install -e ".[dev]"
 ```
 
-Now, you can run make devto start the Dagster server.
+Now, you can run make dev to start the Dagster server.
 
 ### 🌍 Environment Variables
 
@@ -95,11 +89,11 @@ To access data sources and publish datasets, the following environment variables
 - HUGGINGFACE_TOKEN: Token to publish datasets on HuggingFace.
 - DATABASE_PATH: Path to the DuckDB database file (default is ./data/database.duckdb).
 
-You can define these variables in a file .envat the root of your project or configure them in your development environment.
+You can define these variables in a file .env at the root of your project or configure them in your development environment.
 
 ## 📦 Structure
 
-Datania is composed of several components:
+datainlet is composed of several components:
 
 - Dagster : A tool that orchestrates data pipelines.
 - DuckDB and Polars : Database and data processing library.
@@ -107,5 +101,4 @@ Datania is composed of several components:
 
 ## 📄 License
 
-Datania is an open source project under the MIT license .
-
+datainlet is an open source project under the MIT license.
