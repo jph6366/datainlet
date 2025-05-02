@@ -1,8 +1,7 @@
 <!-- markdownlint-disable MD033 MD041-->
 
 <p align="center">
-  <h1 style="font-size:80px; font-weight: 800;" align="center">D A T A N I A</h1>
-  <p align="center">Datos, sin complicaciones.</a> </p>
+  <h1 style="font-size:80px; font-weight: 800;" align="center">D A T A I S L E</h1>
 </p>
 
 <div align="center">
@@ -13,15 +12,15 @@
 
 <br>
 
-Datania es una plataforma de datos abiertos a nivel de España con el objetivo de unificar y armonizar información de multitud de fuentes.
+Dataisle is an asset-centric open data platform that aims to transparently join data available to the public
 
-## 💡 Principios
+## 💡 Principles
 
-- **Transparencia**: Código, estándares, infraestructura, y datos, son públicos. Usa herramientas, estándares e infraestructuras abiertas, y comparte datos en [formatos accesibles](https://voltrondata.com/codex/a-new-frontier).
-- **Modularidad**: Cada componente o dataset puede ser reemplazado, extendido o eliminado. El código funciona bien en muchos entornos (un portátil, un clúster, o desde el navegador) y puede desplegarse en distintos lugares.
-- **Sin Rozamiento**: No preguntes, haz un fork y mejora el código, los modelos, o añade una nueva fuente de datos. Usa los datasets sin límites de API o cuotas.
-- **Datos como Código**: Transformaciones declarativas trackeadas en `git`. Los datasets y sus transformaciones se publican para que otras personas puedan construir sobre ellos.
-- **Pegamento**: Datania es un puente entre herramientas y enfoques y no un estándar o una herramienta en sí misma. Se integra con otras herramientas y servicios.
+Transparency : Code, standards, infrastructure, and data are public. Use open tools, standards, and infrastructure, and share data in accessible formats .
+Modularity : Each component or dataset can be replaced, extended, or removed. The code works well in many environments (a laptop, a cluster, or from the browser) and can be deployed in different locations.
+Frictionless : Don't ask, fork and improve your code, models, or add a new data source. Use datasets without API limits or quotas.
+Data as Code : Declarative transformations tracked in git. Datasets and their transformations are published so others can build on them.
+Glue : Datania is a bridge between tools and approaches, not a standard or a tool in itself. It integrates with other tools and services.
 
 ## ⚙️ Configuración
 
