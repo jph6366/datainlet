@@ -44,7 +44,7 @@
     (ODR), the Department of Agriculture (DOA), and the University of the Virgin Islands (UVI).
     ```
 
-## ⚙️ Configuración
+## ⚙️ Configuration
 
 If you want to contribute, it's easy! Clone the repository and follow these instructions.
 
@@ -72,7 +72,7 @@ pip install -e ".[dev]"
 
 Now, you can run make devto start the Dagster server.
 
-### 🌍 Variables de Entorno
+### 🌍 Environment Variables
 
 To access data sources and publish datasets, the following environment variables must be defined:
 
@@ -82,7 +82,7 @@ To access data sources and publish datasets, the following environment variables
 
 You can define these variables in a file .envat the root of your project or configure them in your development environment.
 
-## 📦 Estructura
+## 📦 Structure
 
 Datania is composed of several components:
 
@@ -90,6 +90,7 @@ Datania is composed of several components:
 - DuckDB and Polars : Database and data processing library.
 - HuggingFace : Platform where we publish the datasets.
 
-## 📄 Licencia
+## 📄 License
 
-Datania es un proyecto de código abierto bajo la licencia [MIT](LICENSE).
+Datania is an open source project under the MIT license .
+
