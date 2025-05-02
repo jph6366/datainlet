@@ -12,7 +12,7 @@
 
 <br>
 
-Dataisle is an asset-centric open data platform that aims to transparently join data available to the public
+Dataisle is a public-facing asset-centric open data platform that aims to transparently join data available to the public
 
 ## 💡 Principles
 
