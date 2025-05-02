@@ -16,7 +16,7 @@
 
 <br>
 
-Dataisle is a priority-resilience, asset-centric open data platform that encourages heterogeneous chunks of resources and jobs to capture some understanding of the world.
+Dataisle is a priority-resilience, asset-centric open data platform that encourages heterogeneous chunks of resources and jobs to capture some understanding of land and water use for the USVI.
 
 ## 💡 Principles
 
