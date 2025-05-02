@@ -20,12 +20,22 @@ Dataisle is a priority-resilience, asset-centric open data platform that encoura
 
 ## 💡 Principles
 
-- Transparency : Code, standards, infrastructure, and data are public. Use open tools, standards, and infrastructure, and share data in accessible formats .
-- Modularity : Each component or dataset can be replaced, extended, or removed. The code works well in many environments (a laptop, a cluster, or from the browser) and can be deployed in different locations.
-- Frictionless : Don't ask, fork and improve your code, models, or add a new data source. Use datasets without API limits or quotas.
-- Data as Code : Declarative transformations tracked in git. Datasets and their transformations are published so others can build on them.
-- Glue : Datania is a bridge between tools and approaches, not a standard or a tool in itself. It integrates with other tools and services.
-- Public Engagement & : 
+- **Transparency** : Code, standards, infrastructure, and data are public. Use open tools, standards, and infrastructure, and share data in accessible formats .
+- **Modularity** : Each component or dataset can be replaced, extended, or removed. The code works well in many environments (a laptop, a cluster, or from the browser) and can be deployed in different locations.
+- **Frictionless** : Don't ask, fork and improve your code, models, or add a new data source. Use datasets without API limits or quotas.
+-**Data as Code** : Declarative transformations tracked in git. Datasets and their transformations are published so others can build on them.
+- **Glue** : Datania is a bridge between tools and approaches, not a standard or a tool in itself. It integrates with other tools and services.
+- **Reslience**: The islands of St. Croix, St. Thomas, and St. John are small; the ridge-to-reef watershed connection is a visible part of lived experience and critical to effective coastal zone management.
+    - According to NOAA, the entire USVI territory - and all its watersheds - is considered to
+    be the coastal zone. However, the USVI has historic and chronic deficiencies in watershed-scale land
+    and water use planning as well as data availability. The small watersheds, steep slopes, and lack of
+    comprehensive planning in development all contribute to growing problems related to stormwater,
+    flooding, erosion, pollution, coastal runoff, groundwater, and drought. These problems are intensified
+    by climate change and social vulnerability. Local agency staff and community members often lack
+    robust environmental literacy (defined as “positive affect, understanding, skills, and environmentally
+    responsible behaviors”) regarding coastal processes, steep slopes, and geospatial data, which can
+    hinder the necessary buy-in from resource managers and the community regarding resilience projects
+
 ## ⚙️ Configuración
 
 Si quieres contribuir, es fácil! Clona el repositorio y sigue estas instrucciones.
