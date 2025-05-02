@@ -3,7 +3,6 @@
 <p align="center">
   <h1 style="font-size:80px; font-weight: 800;" align="center">D A T A I S L E</h1>
   
-   <h4 style="font-size:80px; font-weight: 800;" align="center">Making Better Land and Water Use Decisions, Protecting Natural Resources, and Planning for a Sustainable Future</h4>
   
 </p>
 
@@ -21,7 +20,7 @@
 
 - **Transparency** : Code, standards, infrastructure, and data are public. Use open tools, standards, and infrastructure, and share data in accessible formats .
 
-- **Modularity** : Each component or dataset can be replaced, extended, or removed. The code works well in many environments (a laptop, a cluster, or from the browser) and can be deployed in different locations.
+- **Modular and Interoperable** : Each component can be replaced, extended, or removed. Works well in many environments (your laptop, in a cluster, or from the browser), can be deployed to many places  and integrates with multiple tools. Use open tools, standards, infrastructure, and share data in accessible formats.
 
 - **Frictionless** : Don't ask, fork and improve your code, models, or add a new data source. Use datasets without API limits or quotas.
 
@@ -29,20 +28,35 @@
 
 - **Glue** : Datania is a bridge between tools and approaches, not a standard or a tool in itself. It integrates with other tools and services.
 
-- **[FAIR](https://www.go-fair.org/fair-principles/)**
+- **[#beFAIRandCARE](https://opencontext.org/about/fair-care)** : 
+     <h3 style="font-size:80px; font-weight: 800;" align="center"> Findability, Accessibility, Interoperability, Reuse of digital assets,</h3>
+          <h3 style="font-size:80px; font-weight: 800;" align="center"> and</h3>
+     <h3 style="font-size:80px; font-weight: 800;" align="center"> Collective Benefit, Authority To Control, Responsibility, Ethics </h3>
+
+- **[IOCM](https://iocm.noaa.gov/)** : Integrated Ocean and Coastal Mapping is the practice of planning, acquiring, integrating, and sharing ocean and coastal data and related products so that people who need the data can find it and use it easily:
+     <h3 style="font-size:80px; font-weight: 800;" align="center">Map Once, Use Many Times.</h3>
+
+
+
+- **No vendor lock-in** :
+  
+                          Rely on Open code, standards, and infrastructure.
+  
+                          Use the tool you want to create, explore, and consume the datasets.
+  
+                          Agnostic of any tooling or infrastructure provider.
+
+                          Standard format for data and APIs!
+  
+                          Keep your data as future-friendly and future-proof as possible!
 
 - **Coastal and Climate Resilience**: To be successful, these diverse projects require buy-in from many levels of the community: decision makers, local agency staff, homeowners, real estate professionals, and design, construction, and maintenance contractors.
 
     _From Planning to Action for Coastal Resilience:_
     
     _Elevating Environmental Literacy for USVI Priority Resilience Projects_
-    ```
-    Improving the environmental literacy of these audiences on the specific topics of coastal processes,
-    steep slopes, and geospatial data will increase their buy-in for the Territory’s Priority Resilience
-    Projects listed below. Major partners in these projects include the Department of Public Works (DPW),
-    the VI Territorial Emergency Management Authority (VITEMA), the Office of Disaster Recovery
-    (ODR), the Department of Agriculture (DOA), and the University of the Virgin Islands (UVI).
-    ```
+
+- **Stateless and serverless**: as much as possible. E.g. use GitHub Pages, host datasets on S3, interface with HTML, JavaScript, and WASM. No servers to maintain, no databases to manage, no infrastructure to worry about. Keep infrastructure management lean.
 
 ## ⚙️ Configuration
 
