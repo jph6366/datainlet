@@ -26,6 +26,8 @@
 
 - **Data as Code** : Declarative transformations tracked in git. Datasets and their transformations are published so others can build on them.
 
+- **Stateless and serverless**: as much as possible. E.g. use GitHub Pages, host datasets on S3, interface with HTML, JavaScript, and WASM. No servers to maintain, no databases to manage, no infrastructure to worry about. Keep infrastructure management lean.
+
 - **Glue** : Datania is a bridge between tools and approaches, not a standard or a tool in itself. It integrates with other tools and services.
 
 - **[#beFAIRandCARE](https://opencontext.org/about/fair-care)** : 
@@ -56,7 +58,6 @@
     
     _Elevating Environmental Literacy for USVI Priority Resilience Projects_
 
-- **Stateless and serverless**: as much as possible. E.g. use GitHub Pages, host datasets on S3, interface with HTML, JavaScript, and WASM. No servers to maintain, no databases to manage, no infrastructure to worry about. Keep infrastructure management lean.
 
 ## ⚙️ Configuration
 
