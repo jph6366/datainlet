@@ -15,44 +15,52 @@
 </div>
 
 <br>
+ <h4 style="font-size:80px; font-weight: 800;" align="center">Dataisle is a priority-resilience, asset-centric open data platform that encourages heterogeneous chunks of resources, jobs, and metadata to capture some understanding of land and water use for the USVI.</h4>
 
-Dataisle is a priority-resilience, asset-centric open data platform that encourages heterogeneous chunks of resources and jobs to capture some understanding of land and water use for the USVI.
-
-## 💡 Principles
+## 🌞 Principles
 
 - **Transparency** : Code, standards, infrastructure, and data are public. Use open tools, standards, and infrastructure, and share data in accessible formats .
+
 - **Modularity** : Each component or dataset can be replaced, extended, or removed. The code works well in many environments (a laptop, a cluster, or from the browser) and can be deployed in different locations.
+
 - **Frictionless** : Don't ask, fork and improve your code, models, or add a new data source. Use datasets without API limits or quotas.
--**Data as Code** : Declarative transformations tracked in git. Datasets and their transformations are published so others can build on them.
+
+- **Data as Code** : Declarative transformations tracked in git. Datasets and their transformations are published so others can build on them.
+
 - **Glue** : Datania is a bridge between tools and approaches, not a standard or a tool in itself. It integrates with other tools and services.
-- **Reslience**: The islands of St. Croix, St. Thomas, and St. John are small; the ridge-to-reef watershed connection is a visible part of lived experience and critical to effective coastal zone management.
-    - According to NOAA, the entire USVI territory - and all its watersheds - is considered to
-    be the coastal zone. However, the USVI has historic and chronic deficiencies in watershed-scale land
-    and water use planning as well as data availability. The small watersheds, steep slopes, and lack of
-    comprehensive planning in development all contribute to growing problems related to stormwater,
-    flooding, erosion, pollution, coastal runoff, groundwater, and drought. These problems are intensified
-    by climate change and social vulnerability. Local agency staff and community members often lack
-    robust environmental literacy (defined as “positive affect, understanding, skills, and environmentally
-    responsible behaviors”) regarding coastal processes, steep slopes, and geospatial data, which can
-    hinder the necessary buy-in from resource managers and the community regarding resilience projects
+
+- **[FAIR](https://www.go-fair.org/fair-principles/)**
+
+- **Coastal and Climate Resilience**: To be successful, these diverse projects require buy-in from many levels of the community: decision makers, local agency staff, homeowners, real estate professionals, and design, construction, and maintenance contractors.
+
+    _From Planning to Action for Coastal Resilience:_
+    
+    _Elevating Environmental Literacy for USVI Priority Resilience Projects_
+    ```
+    Improving the environmental literacy of these audiences on the specific topics of coastal processes,
+    steep slopes, and geospatial data will increase their buy-in for the Territory’s Priority Resilience
+    Projects listed below. Major partners in these projects include the Department of Public Works (DPW),
+    the VI Territorial Emergency Management Authority (VITEMA), the Office of Disaster Recovery
+    (ODR), the Department of Agriculture (DOA), and the University of the Virgin Islands (UVI).
+    ```
 
 ## ⚙️ Configuración
 
-Si quieres contribuir, es fácil! Clona el repositorio y sigue estas instrucciones.
+If you want to contribute, it's easy! Clone the repository and follow these instructions.
 
-Cualquier problema que encuentres, no dudes en [abrir una issue](https:github.com/davidgasqyez/datania/issues/new)!
+Any problems you encounter, please feel free to open an issue !
 
 ### 🐍 Python
 
-Instala Python en tu sistema y opcionalmente, [`uv`](https://github.com/astral-sh/uv).
+Install Python on your system and optionally, uv.
 
-Si tienes `uv`, puedes instalar todas las dependencias dentro de un entorno virtual de Python ejecutando `make setup` una vez hayas clonado el repositorio.
+If you have uv, you can install all dependencies inside a Python virtual environment by running make setuponce you have cloned the repository.
 
 ```bash
 make setup
 ```
 
-Si no quieres instalar `uv`, puedes usar Python para crear un entorno virtual y instalar las dependencias.
+If you don't want to install uv, you can use Python to create a virtual environment and install dependencies.
 
 ```bash
 python3 -m venv .venv
@@ -62,25 +70,25 @@ source .venv/bin/activate
 pip install -e ".[dev]"
 ```
 
-Ahora, puedes ejecutar `make dev` para iniciar el servidor de Dagster.
+Now, you can run make devto start the Dagster server.
 
 ### 🌍 Variables de Entorno
 
-Para poder acceder a las fuentes de datos y publicar datasets, hace falta definir las siguientes variables de entorno:
+To access data sources and publish datasets, the following environment variables must be defined:
 
-- `AEMET_API_TOKEN`: Token para acceder a la API de AEMET.
-- `HUGGINGFACE_TOKEN`: Token para publicar datasets en HuggingFace.
-- `DATABASE_PATH`: Ruta al archivo de la base de datos DuckDB (por defecto es `./data/database.duckdb`).
+- AEMET_API_TOKEN: Token to access the AEMET API.
+- HUGGINGFACE_TOKEN: Token to publish datasets on HuggingFace.
+- DATABASE_PATH: Path to the DuckDB database file (default is ./data/database.duckdb).
 
-Puedes definir estas variables en un archivo `.env` en la raíz del proyecto o configurarlas en tu entorno de desarrollo.
+You can define these variables in a file .envat the root of your project or configure them in your development environment.
 
 ## 📦 Estructura
 
-Datania está compuesta por varios componentes:
+Datania is composed of several components:
 
-- **Dagster**: Una herramienta que orquesta los pipelines de datos.
-- **DuckDB y Polars**: Base de datos y librería de procesamiento de datos.
-- **HuggingFace**: Plataforma donde publicamos los datasets.
+- Dagster : A tool that orchestrates data pipelines.
+- DuckDB and Polars : Database and data processing library.
+- HuggingFace : Platform where we publish the datasets.
 
 ## 📄 Licencia
 
