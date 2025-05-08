@@ -8,13 +8,14 @@ class GISDArcGISAPI(dg.ConfigurableResource):
     )
 
     @retry(
-        stop=stop_after_attempt(10),
-        wait=wait_exponential(multiplier=1, min=4, max=20),
+        stop=stop_after_attempt(5),
+        wait=wait_exponential(multiplier=1, min=2, max=10),
+        reraise=True
     )
     def query(self, dataset_name, params=None):
         url = f"{self.endpoint}/{dataset_name}/FeatureServer/0/query"
         default_params = {
-            "resultType": "standard",    # Type of result requested
+            "where": "1=1",
             "outFields": "*",            # Comma-separated list of fields to include; "*" means all fields
             "returnGeometry": "true",    # Explicitly request feature geometries
             "f": "pjson"                 # Response format: pjson (pretty JSON) for easier reading
@@ -28,8 +29,6 @@ class GISDArcGISAPI(dg.ConfigurableResource):
     
 
     def get_us_virgin_islands(self):
-        query_filters = {}
-        query_filters["where"] = "1=1"
-        query_response = self.query(dataset_name="US_Virgin_Islands", params=query_filters)
+        query_response = self.query(dataset_name="US_Virgin_Islands")
 
         return query_response
