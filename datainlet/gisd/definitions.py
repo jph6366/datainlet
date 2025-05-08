@@ -1,11 +1,11 @@
 import dagster as dg
 
-from datania.miteco import assets
-from datania.miteco.resources import MITECOArcGisAPI
+from datainlet.gisd import assets
+from datainlet.gisd.resources import GISDArcGISAPI
 
 definitions = dg.Definitions(
     assets=dg.load_assets_from_modules([assets]),
     resources={
-        "miteco_api": MITECOArcGisAPI(),
+        "gisd_api": GISDArcGISAPI(),
     },
 )

@@ -3,7 +3,7 @@ import os
 import polars as pl
 from dagster import AssetIn, asset
 
-from datania.huggingface.resources import HuggingFaceDatasetPublisher
+from datainlet.huggingface.resources import HuggingFaceDatasetPublisher
 
 
 def create_hf_asset(dataset_name: str):
