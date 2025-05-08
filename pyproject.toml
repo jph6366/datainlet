@@ -12,6 +12,7 @@ dependencies = [
     "httpx>=0.28.1",
     "huggingface-hub>=0.29.3",
     "polars>=1.25.2",
+    "polars-lts-cpu>=1.29.0",
     "pyarrow>=19.0.1",
     "tenacity>=9.0.0",
     "pdal" 
