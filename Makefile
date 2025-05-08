@@ -9,10 +9,10 @@ setup: .uv
 	uv sync --frozen --all-groups
 
 db:
-	wget https://github.com/davidgasquez/datania/releases/latest/download/datania.duckdb -O data/database.duckdb
+	wget https://github.com/jph6366/datainlet/releases/latest/download/datania.duckdb -O data/database.duckdb
 
 run: .uv
-	uv run dagster asset materialize --select \* -m datania.definitions
+	uv run dagster asset materialize --select \* -m datainlet.definitions
 
 dev: .uv
 	uv run dagster dev
