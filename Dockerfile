@@ -1,22 +1,21 @@
-FROM python:3.12
+FROM pdal/pdal
 
+USER root
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/uv
 
-RUN useradd -m -u 1000 user
-USER user
+USER pdal
 ENV HOME=/home/user \
     PATH=/home/user/.local/bin:$PATH
 
-# Copy the datadex project and dependencies
-RUN git clone https://github.com/jph6366/datainlet.git $HOME/app && \
-    cd $HOME/app && \
-    chown -R user:user .
-
 # Create a data directory and set ownership
-RUN mkdir -p $HOME/app/data && chown -R user:user $HOME/app/data
+RUN mkdir -p $HOME/app/
 
 # Set the working directory
 WORKDIR $HOME/app
+
+RUN git clone https://github.com/jph6366/datainlet.git .
+
+RUN mkdir -p data 
 
 # Sync the dependencies
 RUN [ "uv", "sync" ]
