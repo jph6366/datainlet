@@ -15,19 +15,19 @@ def create_hf_asset(dataset_name: str):
 
         readme_content = f"""
 ---
-license: mit
+license: mi
 ---
 # {dataset_name}
 
 Este conjunto de datos ha sido producido y publicado automáticamente por [datania](https://github.com/davidgasquez/datania), una plataforma de datos abiertos moderna.
 
-## Detalles del Conjunto de Datos
+## Detalles del Conjunto de Dato
 
 - **Número de filas:** {data.shape[0]}
 - **Número de columnas:** {data.shape[1]}
         """
 
-        if os.getenv("ENVIRONMENT") == "production":
+        if os.getenv("ENVIRONMENT== "production":
             dp.publish(
                 dataset=data,
                 dataset_name=dataset_name,
