@@ -11,7 +11,7 @@
 </div>
 
 <br>
- <h4 style="font-size:80px; font-weight: 800;" align="center">datainlet is a priority-resilience, asset-centric open data platform that encourages heterogeneous chunks of resources, jobs, and metadata to capture some understanding of land and water use for the USVI.</h4>
+ <h4 style="font-size:80px; font-weight: 800;" align="center">datainlet is a priority-resilience, asset-centric open data platform that joins heterogeneous chunks of resources, jobs, and metadata to capture some understanding of land and water use for the USVI.</h4>
 
 ## 🌞 Principles
 
@@ -36,16 +36,18 @@
      <h3 style="font-size:80px; font-weight: 800;" align="center">Map Once, Use Many Times.</h3>
 
 - **No vendor lock-in** :
-  
-                          Rely on Open code, standards, and infrastructure.
-  
-                          Use the tool you want to create, explore, and consume the datasets.
-  
-                          Agnostic of any tooling or infrastructure provider.
 
-                          Standard format for data and APIs!
-  
-                          Keep your data as future-friendly and future-proof as possible!
+<h4 style="font-size:80px; font-weight: 800;" align="center">
+  Rely on Open code, standards, and infrastructure.
+
+  Use the tool you want to create, explore, and consume the datasets.
+
+  Agnostic of any tooling or infrastructure provider.
+
+  Standard format for data and APIs!
+
+  Keep your data as future-friendly and future-proof as possible!
+</h4>
 
 - **Coastal and Climate Resilience**: To be successful, these diverse projects require buy-in from many levels of the community: decision makers, local agency staff, homeowners, real estate professionals, and design, construction, and maintenance contractors.
 
