@@ -11,7 +11,7 @@
 </div>
 
 <br>
- <h4 style="font-size:80px; font-weight: 800;" align="center">datainlet is a priority-resilience, asset-centric open data platform that encourages heterogeneous chunks of resources, jobs, and metadata to capture some understanding of land and water use for the USVI.</h4>
+ <h4 style="font-size:80px; font-weight: 800;" align="center">datainlet is a priority-resilience, asset-centric open data platform that joins heterogeneous chunks of resources, jobs, and metadata to capture some understanding of land and water use for the USVI.</h4>
 
 ## 🌞 Principles
 
