@@ -25,7 +25,7 @@
 
 - **Stateless and serverless**: as much as possible. E.g. use GitHub Pages, host datasets on S3, interface with HTML, JavaScript, and WASM. No servers to maintain, no databases to manage, no infrastructure to worry about. Keep infrastructure management lean.
 
-- **Glue** : Datania is a bridge between tools and approaches, not a standard or a tool in itself. It integrates with other tools and services.
+- **Glue** : GDAL/OGR and PDAL are tools that support tons of geospatial raster and vector formats, and pointcloud formats. datainlet is a bridge between tools and approaches, so we want to ensure that your data platform isn't GDAL in a Dagster trench coat. Instead we enable modular design of ingesting and staging of data that is idiomatic and asset-centric from start to end
 
 - **[#beFAIRandCARE](https://opencontext.org/about/fair-care)** :
      <h3 style="font-size:80px; font-weight: 800;" align="center"> Findability, Accessibility, Interoperability, Reuse of digital assets,</h3>
