@@ -21,7 +21,7 @@
 
 - **Frictionless** : Don't ask, fork and improve your code, models, or add a new data source. Use datasets without API limits or quotas.
 
-- **Data as Code** : Declarative transformations tracked in git. Datasets and their transformations are published so others can build on them.
+- **Data as Code** : Declarative transformations tracked in git and data quality and insights embedded into Dagster. Datasets and their transformations are published so others can build on them. 
 
 - **Stateless and serverless**: as much as possible. E.g. use GitHub Pages, host datasets on S3, interface with HTML, JavaScript, and WASM. No servers to maintain, no databases to manage, no infrastructure to worry about. Keep infrastructure management lean.
 

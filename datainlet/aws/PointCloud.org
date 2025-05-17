@@ -1,0 +1,11 @@
+#+title: Point Cloud Data Orginazation
+
+* TODO Initialize P.C.D.O. Knowledge base
+
+* TODO #A Stream Entwine Point Data in readble chunks using PDAL
+
+* TODO #B Retrive STAC EPT catalog data
+
+* TODO #C Collect and Map Cloud-native formats (geoparquet, STAC-geoparquet, geoarrow)
+
+* TODO #D Pipe Dagster PDAL into TypeScript leveraging BabylonJS, TileDBViz, 3D Tiles + Cesium

@@ -3,20 +3,22 @@ name = "datainlet"
 version = "0.0.0"
 description = "A resident-centric open data platform to join datasets from different sources."
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.10,<3.13"
 dependencies = [
-    "dagster>=1.10.4",
+    "dagster>=1.10.0",
     "dagster-duckdb>=0.26.4",
     "dagster-duckdb-polars>=0.26.4",
+    "dagstermill",
     "duckdb>=1.2.1",
     "httpx>=0.28.1",
     "huggingface-hub>=0.29.3",
     "polars-lts-cpu>=1.29.0",
-    "pyarrow>=19.0.1",
+    "pyarrow",
     "tenacity>=9.0.0",
     "dagster-webserver>=1.10.4",
     "ipykernel>=6.29.5",
-    "ruff>=0.11.0",
+    "ruff>=0.11.0", 
+    "pytest"
 ]
 
 [build-system]
@@ -30,12 +32,19 @@ packages = ["datainlet"]
 module_name = "datainlet.definitions"
 code_location_name = "datainlet"
 
+[tool.dg]
+directory_type = "project"
+
 [tool.pixi.workspace]
 channels = ["conda-forge"]
 platforms = ["win-64", "linux-64", "osx-64", "osx-arm64"]
 
 [tool.pixi.tasks]
-dev = { cmd = "dagster dev"}
+dev = { cmd = "dagster dev" }
 
 [tool.pixi.dependencies]
 python-pdal = ">=3.4.5,<4"
+tiledb = ">=2.26.2,<3"
+libpdal-tiledb = ">=2.8.2,<3"
+notebook = "*"
+structlog = ">=25.2.0,<26"
