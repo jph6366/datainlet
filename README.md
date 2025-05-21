@@ -11,54 +11,9 @@
 </div>
 
 <br>
- <h4 style="font-size:80px; font-weight: 800;" align="center">datainlet is a priority-resilience, asset-centric open data platform that joins heterogeneous chunks of resources, jobs, and metadata to capture some understanding of land and water use for the USVI.</h4>
+ <h4 style="font-size:80px; font-weight: 800;" align="center">datainlet is a resilience-first, asset-centric open data platform.  </h4>
 
-## 🌞 Principles
-
-- **Transparency** : Code, standards, infrastructure, and data are public. Use open tools, standards, and infrastructure, and share data in accessible formats .
-
-- **Modular and Interoperable** : Each component can be replaced, extended, or removed. Works well in many environments (your laptop, in a cluster, or from the browser), can be deployed to many places  and integrates with multiple tools. Use open tools, standards, infrastructure, and share data in accessible formats.
-
-- **Frictionless** : Don't ask, fork and improve your code, models, or add a new data source. Use datasets without API limits or quotas.
-
-- **Data as Code** : Declarative transformations tracked in git and data quality and insights embedded into Dagster. Datasets and their transformations are published so others can build on them. 
-
-- **Stateless and serverless**: as much as possible. E.g. use GitHub Pages, host datasets on S3, interface with HTML, JavaScript, and WASM. No servers to maintain, no databases to manage, no infrastructure to worry about. Keep infrastructure management lean.
-
-- **Glue** : GDAL/OGR and PDAL are tools that support tons of geospatial raster and vector formats, and pointcloud formats. datainlet is a bridge between tools and approaches, so we want to ensure that your data platform isn't GDAL in a Dagster trench coat. Instead we enable modular design of ingesting and staging of data that is idiomatic and asset-centric from start to end
-
-- **[#beFAIRandCARE](https://opencontext.org/about/fair-care)** :
-     <h3 style="font-size:80px; font-weight: 800;" align="center"> Findability, Accessibility, Interoperability, Reuse of digital assets,</h3>
-          <h3 style="font-size:80px; font-weight: 800;" align="center"> and</h3>
-     <h3 style="font-size:80px; font-weight: 800;" align="center"> Collective Benefit, Authority To Control, Responsibility, Ethics </h3>
-
-- **[IOCM](https://iocm.noaa.gov/)** : Integrated Ocean and Coastal Mapping is the practice of planning, acquiring, integrating, and sharing ocean and coastal data and related products so that people who need the data can find it and use it easily:
-     <h3 style="font-size:80px; font-weight: 800;" align="center">Map Once, Use Many Times.</h3>
-
-- **No vendor lock-in** :
-
-<h4 style="font-size:80px; font-weight: 800;" align="center">
-  Rely on Open code, standards, and infrastructure.
-
-  Use the tool you want to create, explore, and consume the datasets.
-
-  Agnostic of any tooling or infrastructure provider.
-
-  Standard format for data and APIs!
-
-  Keep your data as future-friendly and future-proof as possible!
-</h4>
-
-- **Resilience**: For communities to be successful, multi-stakeholder projects require buy-in from many levels of the community: decision makers, local agency staff, homeowners, real estate professionals, and design, construction, and maintenance contractors. After pipelining your assets, resources, jobs, etc.; You should be able to immediately view your data tables and visualize complex insights using simple workflows through embedded databases, ArcGIS, QGIS, Jupyter Notebooks, MapLibre GL JS, CesiumGS, and other supported desktop/web/mobile integrations.
-
-
-## Proof of Concept - Showcase Project
-<h4 style="font-size:80px; font-weight: 800;" align="center">
-
-  _From Planning to Action for Coastal Resilience:_
-
-  _Elevating Environmental Literacy for USVI Priority Resilience Projects_
-</h4>
+ <p style="font-size:80px; font-weight: 800;" align="center"> Unifies and modernizes heterogeneous chunks of resources, jobs, and metadata to capture some understanding of land and water use, or model an urban network for avaiable partitions, or perhaps schedule and materialize assets for publishing a map or dashboard, or maybe systematically generate DEMs from the local coastal community to the global scale </p>
 
 ## ⚙️ Configuration
 
@@ -104,7 +59,58 @@ datainlet is composed of several components:
 
 - Dagster : A tool that orchestrates data pipelines.
 - DuckDB and Polars : Database and data processing library.
+- PDAL and TileDB: Data abstraction library and Database
 - HuggingFace : Platform where we publish the datasets.
+
+## 🌞 Principles
+
+- **Transparency** : Code, standards, infrastructure, and data are public. Use open tools, standards, and infrastructure, and share data in accessible formats .
+
+- **Modular and Interoperable** : Each component can be replaced, extended, or removed. Works well in many environments (your laptop, in a cluster, or from the browser), can be deployed to many places  and integrates with multiple tools. Use open tools, standards, infrastructure, and share data in accessible formats.
+
+- **Frictionless** : Don't ask, fork and improve your code, models, or add a new data source. Use datasets without API limits or quotas.
+
+- **Data as Code** : Declarative transformations tracked in git and data quality and insights embedded into Dagster. Datasets and their transformations are published so others can build on them. 
+
+- **Stateless and serverless**: as much as possible. E.g. use GitHub Pages, host datasets on S3, interface with HTML, JavaScript, and WASM. No servers to maintain, no databases to manage, no infrastructure to worry about. Keep infrastructure management lean.
+
+- **Glue** : GDAL/OGR and PDAL are tools that support tons of geospatial raster and vector formats, and pointcloud formats. datainlet is a bridge between tools and approaches, so we want to ensure that your data platform isn't GDAL in a Dagster trench coat. Instead we enable modular design of ingesting and staging of data that is idiomatic and asset-centric from start to end
+
+- **[#beFAIRandCARE](https://opencontext.org/about/fair-care)** :
+     <h3 style="font-size:80px; font-weight: 800;" align="center"> Findability, Accessibility, Interoperability, Reuse of digital assets,</h3>
+          <h3 style="font-size:80px; font-weight: 800;" align="center"> and</h3>
+     <h3 style="font-size:80px; font-weight: 800;" align="center"> Collective Benefit, Authority To Control, Responsibility, Ethics </h3>
+
+- **[IOCM](https://iocm.noaa.gov/)** : Integrated Ocean and Coastal Mapping is the practice of planning, acquiring, integrating, and sharing ocean and coastal data and related products so that people who need the data can find it and use it easily:
+     <h3 style="font-size:80px; font-weight: 800;" align="center">Map Once, Use Many Times.</h3>
+
+- **No vendor lock-in** :
+
+<h4 style="font-size:80px; font-weight: 800;" align="center">
+  Rely on Open code, standards, and infrastructure.
+
+  Use the tool you want to create, explore, and consume the datasets.
+
+  Agnostic of any tooling or infrastructure provider.
+
+  Standard format for data and APIs!
+
+  Keep your data as future-friendly and future-proof as possible!
+</h4>
+
+- **Resilience**: For communities to be successful, multi-stakeholder projects require buy-in from many levels of the community: decision makers, local agency staff, homeowners, real estate professionals, and design, construction, and maintenance contractors.
+  - After pipelining your assets, resources, jobs, etc.; You should be able to immediately view your data tables and visualize complex insights using simple workflows ranging from databases, ArcGIS, QGIS, Jupyter Notebooks, MapLibre, and more to come. 
+
+
+## Proof of Concept - Showcase Project
+<h4 style="font-size:80px; font-weight: 800;" align="center">
+
+  _From Planning to Action for Coastal Resilience:_
+
+  _Elevating Environmental Literacy for USVI Priority Resilience Projects_
+</h4>
+
+
 
 ## 📄 License
 
