@@ -49,7 +49,7 @@
   Keep your data as future-friendly and future-proof as possible!
 </h4>
 
-- **Coastal and Climate Resilience**: To be successful, these diverse projects require buy-in from many levels of the community: decision makers, local agency staff, homeowners, real estate professionals, and design, construction, and maintenance contractors.
+- **Resilience**: For communities to be successful, multi-stakeholder projects require buy-in from many levels of the community: decision makers, local agency staff, homeowners, real estate professionals, and design, construction, and maintenance contractors. After pipelining your assets, resources, jobs, etc.; You should be able to immediately view your data tables and visualize complex insights using simple workflows through embedded databases, ArcGIS, QGIS, Jupyter Notebooks, MapLibre GL JS, CesiumGS, and other supported desktop/web/mobile integrations.
 
 
 ## Proof of Concept - Showcase Project
