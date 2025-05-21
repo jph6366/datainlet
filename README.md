@@ -13,7 +13,7 @@
 <br>
  <h4 style="font-size:80px; font-weight: 800;" align="center">datainlet is a resilience-first, asset-centric open data platform.  </h4>
 
- <p style="font-size:80px; font-weight: 800;" align="center"> Unifies and modernizes heterogeneous chunks of resources, jobs, and metadata to capture some understanding of land and water use, or model an urban network for avaiable partitions, or perhaps schedule and materialize assets for publishing a map or dashboard, or maybe systematically generate DEMs from the local coastal community to the global scale </p>
+ <p style="font-size:80px; font-weight: 800;" align="center"> Unifies and modernizes schools of data extracteed from software-deined assets, resources, schedules, and sensors deployed in a Dagster project. </p>
 
 ## ⚙️ Configuration
 
