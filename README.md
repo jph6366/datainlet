@@ -65,7 +65,7 @@ datainlet is composed of several components:
 
 - **Stateless and serverless**: as much as possible. E.g. use GitHub Pages, host datasets on S3, interface with HTML, JavaScript, and WASM. No servers to maintain, no databases to manage, no infrastructure to worry about. Keep infrastructure management lean.
 
-- **Glue** : GDAL/OGR and PDAL are tools that support tons of geospatial raster and vector formats, and pointcloud formats. datainlet is a bridge between tools and approaches, so we want to ensure that your data platform isn't GDAL in a Dagster trench coat. Instead we enable modular design of ingesting and staging of data that is idiomatic and asset-centric from start to end
+- **Glue** : datainlet is a bridge between tools and approaches, so we want to ensure that your data platform isn't just GDAL in a trench coat. Instead we enable modular design of ingesting and staging of raw and processed data that is transparent and asset-centric from start to completion.
 
 - **[#beFAIRandCARE](https://opencontext.org/about/fair-care)** :
      <h3 style="font-size:80px; font-weight: 800;" align="center"> Findability, Accessibility, Interoperability, Reuse of digital assets,</h3>
