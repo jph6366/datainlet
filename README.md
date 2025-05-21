@@ -23,25 +23,13 @@ Any problems you encounter, please feel free to open an issue !
 
 ### 🐍 Python
 
-Install Python on your system and optionally, uv.
+Install Python on your system and pixi.
 
-If you have uv, you can install all dependencies inside a Python virtual environment by running make setup once you have cloned the repository.
+If you have pixi, you can install all dependencies inside a Pixi virtual environment by running a pixi task once you have cloned the repository.
 
 ```bash
-make setup
+pixi run dev
 ```
-
-If you don't want to install uv, you can use Python to create a virtual environment and install dependencies.
-
-``` bash
-python3 -m venv .venv
-source .venv/bin/activate
-
-# Install the package and dependencies
-pip install -e ".[dev]"
-```
-
-Now, you can run make dev to start the Dagster server.
 
 ### 🌍 Environment Variables
 
