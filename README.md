@@ -51,9 +51,14 @@
 
 - **Coastal and Climate Resilience**: To be successful, these diverse projects require buy-in from many levels of the community: decision makers, local agency staff, homeowners, real estate professionals, and design, construction, and maintenance contractors.
 
-    _From Planning to Action for Coastal Resilience:_
 
-    _Elevating Environmental Literacy for USVI Priority Resilience Projects_
+## Proof of Concept - Showcase Project
+<h4 style="font-size:80px; font-weight: 800;" align="center">
+
+  _From Planning to Action for Coastal Resilience:_
+
+  _Elevating Environmental Literacy for USVI Priority Resilience Projects_
+</h4>
 
 ## ⚙️ Configuration
 
