@@ -65,7 +65,10 @@ datainlet is composed of several components:
 
 - **Stateless and serverless**: as much as possible. E.g. use GitHub Pages, host datasets on S3, interface with HTML, JavaScript, and WASM. No servers to maintain, no databases to manage, no infrastructure to worry about. Keep infrastructure management lean.
 
-- **Glue** : datainlet is a bridge between tools and approaches, so we want to ensure that your data platform isn't just GDAL in a trench coat. Instead we enable modular design of ingesting and staging of raw and processed data that is transparent and asset-centric from start to completion.
+- **Glue** : datainlet is a bridge between tools and approaches, so we want to ensure that your data platform isn't just GDAL in a trench coat.
+  - We enable modular asset materialization of ingesting and staging of raw and processed data that is transparent and asset-centric for the community configuration from start to completion.
+    - DuckDB for a simple, portable, feature-rich, fast, Dagster-integrated RDBMS to provide high performance on complex queries against large databases in embedded configuration, such as combining tables with hundreds of columns and billions of rows.
+    - TileDB for a single, unified solution that manages the geospatial data objects along with the raw original data (e.g., images, text files, etc), the ML embedding models, and all the other data modalities in your application
 
 - **[#beFAIRandCARE](https://opencontext.org/about/fair-care)** :
      <h3 style="font-size:80px; font-weight: 800;" align="center"> Findability, Accessibility, Interoperability, Reuse of digital assets,</h3>
