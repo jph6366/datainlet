@@ -93,7 +93,8 @@ datainlet is composed of several components:
 </h4>
 
 - **Resilience**: For communities to be successful, multi-stakeholder projects require buy-in from many levels of the community: decision makers, local agency staff, homeowners, real estate professionals, and design, construction, and maintenance contractors.
-  - After pipelining your assets, resources, jobs, etc.; You should be able to immediately view your data tables and visualize complex insights using simple workflows ranging from databases, ArcGIS, QGIS, Jupyter Notebooks, MapLibre, and more to come. 
+  - After pipelining your assets, resources, jobs, etc.; You should be able to immediately view your data tables and visualize complex insights using simple workflows ranging from databases, ArcGIS, QGIS, Jupyter Notebooks, MapLibre, and more to come.
+  - Finally once all the inputs and ouputs are accounted for, accessible AI engineering assets should bolster the community of interest through environmental literacy and perhaps training in accessible AI engineering tools and workloads.
 
 
 ## Proof of Concept - Showcase Project
