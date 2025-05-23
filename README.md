@@ -11,7 +11,47 @@
 </div>
 
 <br>
- <h4 style="font-size:80px; font-weight: 800;" align="center">datainlet is a priority-resilience, asset-centric open data platform that joins heterogeneous chunks of resources, jobs, and metadata to capture some understanding of land and water use for the USVI.</h4>
+ <h4 style="font-size:80px; font-weight: 800;" align="center">datainlet is a community-based, asset-centric open data platform.  </h4>
+
+ <p style="font-size:80px; font-weight: 800;" align="center"> Unifies and modernizes schools of data extracted from software-defined assets, resources, schedules, and sensors deployed in a Dagster project. </p>
+
+## ⚙️ Configuration
+
+If you want to contribute, it's easy! Clone the repository and follow these instructions.
+
+Any problems you encounter, please feel free to open an issue !
+
+### 🐍 Python
+
+Install Python on your system and pixi.
+
+If you have pixi, you can install all dependencies inside a Pixi virtual environment by running a pixi task once you have cloned the repository.
+
+```bash
+pixi run dev
+```
+
+### 🌍 Environment Variables
+
+To access data sources and publish datasets, the following environment variables must be defined:
+
+- AEMET_API_TOKEN: Token to access the AEMET API.
+- HUGGINGFACE_TOKEN: Token to publish datasets on HuggingFace.
+- DATABASE_PATH: Path to the DuckDB database file (default is ./data/database.duckdb).
+
+You can define these variables in a file .env at the root of your project or configure them in your development environment.
+
+## 📦 Structure
+
+datainlet is composed of several components:
+
+- Dagster and dbt : A tool that orchestrates data pipelines, and a transformation workflow that compiles and runs your analytics code against your data platform, enabling you and your team to collaborate on a single source of truth for metrics, insights, and business definitions.
+- DuckDB and Polars : Database and data processing library.
+- GDAL and DuckDB Spatial Extension : Geo data abstraction library and a prototype of a geospatial extension for DuckDB.
+- PDAL and TileDB : Point data abstraction library and Database.
+- GeoParquet, GeoArrow :  geospatial data in Apache Arrow and Apache Parquet.
+- STAC : common language to describe geospatial information, so it can more easily be worked with, indexed, and discovered.
+- HuggingFace : Platform where we publish the datasets.
 
 ## 🌞 Principles
 
@@ -25,7 +65,10 @@
 
 - **Stateless and serverless**: as much as possible. E.g. use GitHub Pages, host datasets on S3, interface with HTML, JavaScript, and WASM. No servers to maintain, no databases to manage, no infrastructure to worry about. Keep infrastructure management lean.
 
-- **Glue** : GDAL/OGR and PDAL are tools that support tons of geospatial raster and vector formats, and pointcloud formats. datainlet is a bridge between tools and approaches, so we want to ensure that your data platform isn't GDAL in a Dagster trench coat. Instead we enable modular design of ingesting and staging of data that is idiomatic and asset-centric from start to end
+- **Glue** : datainlet is a bridge between tools and approaches, so we want to ensure that your data platform isn't just GDAL in a trench coat.
+  - We enable modular asset materialization of ingesting and staging of raw and processed data that is transparent and asset-centric for the community configuration from start to completion.
+    - DuckDB for a simple, portable, feature-rich, fast, Dagster-integrated RDBMS to provide high performance on complex queries against large databases in embedded configuration, such as combining tables with hundreds of columns and billions of rows.
+    - TileDB for a single, unified solution that manages the geospatial data objects along with the raw original data (e.g., images, text files, etc), the ML embedding models, and all the other data modalities in your application
 
 - **[#beFAIRandCARE](https://opencontext.org/about/fair-care)** :
      <h3 style="font-size:80px; font-weight: 800;" align="center"> Findability, Accessibility, Interoperability, Reuse of digital assets,</h3>
@@ -49,57 +92,22 @@
   Keep your data as future-friendly and future-proof as possible!
 </h4>
 
-- **Coastal and Climate Resilience**: To be successful, these diverse projects require buy-in from many levels of the community: decision makers, local agency staff, homeowners, real estate professionals, and design, construction, and maintenance contractors.
+- **Resilience**: For communities to be successful, multi-stakeholder projects require buy-in from many levels of the community: decision makers, local agency staff, homeowners, real estate professionals, and design, construction, and maintenance contractors.
+  - After pipelining your assets, resources, jobs, etc.; You should be able to immediately view your data tables and visualize complex insights using simple workflows ranging from databases, ArcGIS, QGIS, Jupyter Notebooks, MapLibre, and more to come.
+  - Finally once all the inputs and ouputs are accounted for, accessible AI engineering assets should bolster the community of interest through environmental literacy and perhaps training in accessible AI engineering tools and workloads.
 
-    _From Planning to Action for Coastal Resilience:_
 
-    _Elevating Environmental Literacy for USVI Priority Resilience Projects_
+## Proof of Concept - Showcase Project
+<h4 style="font-size:80px; font-weight: 800;" align="center">
 
-## ⚙️ Configuration
+  _From Planning to Action for Coastal Resilience:_
 
-If you want to contribute, it's easy! Clone the repository and follow these instructions.
+  _Elevating Environmental Literacy for USVI Priority Resilience Projects_
 
-Any problems you encounter, please feel free to open an issue !
+  https://huggingface.co/datasets/Jphardee/PRVI_Wetlands
+</h4>
 
-### 🐍 Python
 
-Install Python on your system and optionally, uv.
-
-If you have uv, you can install all dependencies inside a Python virtual environment by running make setup once you have cloned the repository.
-
-```bash
-make setup
-```
-
-If you don't want to install uv, you can use Python to create a virtual environment and install dependencies.
-
-``` bash
-python3 -m venv .venv
-source .venv/bin/activate
-
-# Install the package and dependencies
-pip install -e ".[dev]"
-```
-
-Now, you can run make dev to start the Dagster server.
-
-### 🌍 Environment Variables
-
-To access data sources and publish datasets, the following environment variables must be defined:
-
-- AEMET_API_TOKEN: Token to access the AEMET API.
-- HUGGINGFACE_TOKEN: Token to publish datasets on HuggingFace.
-- DATABASE_PATH: Path to the DuckDB database file (default is ./data/database.duckdb).
-
-You can define these variables in a file .env at the root of your project or configure them in your development environment.
-
-## 📦 Structure
-
-datainlet is composed of several components:
-
-- Dagster : A tool that orchestrates data pipelines.
-- DuckDB and Polars : Database and data processing library.
-- HuggingFace : Platform where we publish the datasets.
 
 ## 📄 License
 
