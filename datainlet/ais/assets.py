@@ -11,11 +11,14 @@ import threading
 import concurrent.futures as cf
 import dagster as dg
 from dagster_duckdb import DuckDBResource
-
+from datainlet.ais import constants
+from datainlet.ais.partitions import weekly_partition
 import tqdm
+import zipfile
 import httpx
+import pandas as pd
 import polars as pl
-from pyarrow import csv, table
+from pyarrow import csv, types
 
 def connect_to_duckdb(database: DuckDBResource,
                       progress_bar=False,
@@ -40,10 +43,30 @@ def connect_to_duckdb(database: DuckDBResource,
     if tmp_size is not None:
         conn.sql(f"SET max_temp_directory_size='{tmp_size}'")
 
+def duckdb_setup(conn):
+
+    duckdb_install = "INSTALL SPATIAL;"
+    duckdb_spatial = "LOAD SPATIAL;"
+    duckdb_install_h3 = "INSTALL H3 FROM community;"
+    duckdb_h3 = "LOAD H3;"
+    duckdb_pgbar = "SET enable_progress_bar=true"
+    duckdb_threads = f"SET threads={os.cpu_count()}"
+    duckdb_memlimit = "SET memory_limit='10GB'"
+    duckdb_tmpdir = f"SET temp_directory='{os.getenv("DATABASE_TMPDIR", "data/tmp")}'"
+    duckdb_tmpsize = f"SET max_temp_directory_size=\"{os.getenv("DATABASE_TMPSIZE", "99GB")}\""
+    conn.execute(duckdb_install)
+    conn.execute(duckdb_spatial)
+    conn.execute(duckdb_install_h3)
+    conn.execute(duckdb_h3)
+    conn.execute(duckdb_pgbar)
+    conn.execute(duckdb_threads)
+    conn.execute(duckdb_memlimit)
+    conn.execute(duckdb_tmpdir)
+    conn.execute(duckdb_tmpsize)
+
     return conn
 
 def get_dtypes():
-
     pd_dtypes={
         'MMSI': 'string',
         'BASEDATETIME': 'string',
@@ -63,9 +86,7 @@ def get_dtypes():
         'CARGO': 'string',
         'TRANSCEIVERCLASS': 'string'
     }
-
     return pd_dtypes
-
 
 def mk_points(conn, use_primary_key=False, append=False):
 
@@ -170,7 +191,130 @@ def df_chunk_to_duckdb(conn, chunk, h3_level=15):
     conn.sql("COMMIT")
     conn.unregister("ais_df")
 
+@dg.asset(
+    partitions_def=weekly_partition
+)
+def ais_file(context: dg.AssetExecutionContext) -> dg.MaterializeResult:
 
+    partition_date_str = context.partition_key
+    year = partition_date_str[:4]
+    month = partition_date_str[5:7]
+    day = partition_date_str[8:]
+    raw_ais = httpx.get(
+        f"https://coast.noaa.gov/htdata/CMSP/AISDataHandler/{year}/AIS_{year}_{month}_{day}.zip"
+        , verify=False
+    )
+    with open( constants.ZIP_DESTINATION_DIR + f"AIS_{year}_{month}_{day}.zip","wb") as output:
+        output.write(raw_ais.content)
+    try:
+        with zipfile.ZipFile(constants.ZIP_DESTINATION_DIR + f"AIS_{year}_{month}_{day}.zip", 'r') as zip_ref:
+            zip_ref.extractall(constants.ZIP_DESTINATION_DIR)
+        csv_file_path = os.path.join(constants.ZIP_DESTINATION_DIR, f"AIS_{year}_{month}_{day}.csv" )
+    except zipfile.BadZipFile:
+        context.log.error(f"Error: Could not open or read ZIP file: {constants.ZIP_AIS_FILE_PATH}")
+        return dg.MaterializeResult(failure=True)
+
+    pd_dtypes = get_dtypes()
+    num_rows = len(
+        csv.read_csv(csv_file_path,
+                     read_options=csv.ReadOptions(
+                         skip_rows=1,
+                         column_names=list(pd_dtypes.keys()),
+                         block_size=16000
+                     ),
+                     convert_options=csv.ConvertOptions(column_types=pd_dtypes)
+                     )
+    )
+    return dg.MaterializeResult(
+        metadata={
+            'Number of records': dg.MetadataValue.int(num_rows)
+        }
+    )
+
+@dg.asset(
+    partitions_def=weekly_partition,
+    deps=[ais_file],
+    group_name="duckdb_mgr"
+)
+def ais_duckdb(context: dg.AssetExecutionContext, database: DuckDBResource) -> None:
+    lock = threading.Lock()
+    partition_date_str = context.partition_key
+    year = partition_date_str[:4]
+    month = partition_date_str[5:7]
+    day = partition_date_str[8:]
+    pd_dtypes = get_dtypes()
+    with lock:
+        with database.get_connection() as conn:
+            conn = duckdb_setup(conn)
+            reader = pl.read_csv(
+            f"data/raw/AIS_{year}_{month}_{day}.csv",
+            skip_rows=1,
+            has_header=False,
+            use_pyarrow=True,
+            low_memory=True,
+            new_columns=list(pd_dtypes.keys())
+          )
+            df = reader.to_pandas(use_pyarrow_extension_array=True)
+            parquet_file = f"data/raw/AIS_{2024}_03_24.parquet"
+            conn.execute(f"""
+        COPY (
+            FROM df
+            SELECT
+                h3_latlng_to_cell(LAT, LON, 15) AS H3_15,
+                unnest(
+                    max_by(COLUMNS(*), DRAFT, 1),
+                    recursive := 1
+                ),
+                ST_POINT(
+                    h3_cell_to_lng(
+                        h3_latlng_to_cell(LAT, LON, 15)
+                    ),
+                    h3_cell_to_lat(
+                        h3_latlng_to_cell(LAT, LON, 15)
+                    )
+                ) AS WKB
+            GROUP BY H3_15
+            ORDER BY H3_15
+        ) TO '{parquet_file}' (FORMAT PARQUET)
+        """)
+
+
+
+
+
+def ais_topN_aggregation(database: DuckDBResource, df: pd.DataFrame):
+
+    parquet_file = f"data/raw/AIS_{2024}_03_24.parquet"
+    with database.get_connection() as conn:
+        conn.execute(f"""
+        COPY (
+            FROM df
+            SELECT
+                h3_latlng_to_cell(LAT, LON, 15) AS H3_15,
+                unnest(
+                    max_by(COLUMNS(*), DRAFT, 1),
+                    recursive := 1
+                ),
+                ST_POINT(
+                    h3_cell_to_lng(
+                        h3_latlng_to_cell(LAT, LON, 15)
+                    ),
+                    h3_cell_to_lat(
+                        h3_latlng_to_cell(LAT, LON, 15)
+                    )
+                ) AS WKB
+            GROUP BY H3_15
+            ORDER BY H3_15
+        ) TO '{parquet_file}' (FORMAT PARQUET)
+        """)
+
+
+
+
+        
+    
+
+    
 
 def ais_to_duckdb(
         db_file,

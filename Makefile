@@ -15,7 +15,7 @@ run: .uv
 	uv run dagster asset materialize --select \* -m datainlet.definitions
 
 dev: .uv
-	uv run dagster dev
+	uv run --python 3.11 dagster dev
 
 .PHONY: web
 web:

@@ -46,7 +46,7 @@ You can define these variables in a file .env at the root of your project or con
 datainlet is composed of several components:
 
 - Dagster and dbt : A tool that orchestrates data pipelines, and a transformation workflow that compiles and runs your analytics code against your data platform, enabling you and your team to collaborate on a single source of truth for metrics, insights, and business definitions.
-- DuckDB and Polars : Database and data processing library.
+- DuckDB and Pandas Polars : Database and DataFrames.
 - GDAL and DuckDB Spatial Extension : Geo data abstraction library and a prototype of a geospatial extension for DuckDB.
 - PDAL and TileDB : Point data abstraction library and Database.
 - GeoParquet, GeoArrow :  geospatial data in Apache Arrow and Apache Parquet.

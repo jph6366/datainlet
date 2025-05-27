@@ -169,3 +169,7 @@ dbt/.user.yml
 # data
 data/*
 !data/.gitkeep
+
+
+# web folder
+web/node_modules/*
