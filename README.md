@@ -11,7 +11,7 @@
 </div>
 
 <br>
- <h4 style="font-size:80px; font-weight: 800;" align="center">datainlet is a community-based, asset-centric open data platform. ⚠ work in progress ⚠ </h4>
+ <h4 style="font-size:80px; font-weight: 800;" align="center">datainlet is a coastal community-based, asset-centric open data platform. ⚠ work in progress ⚠ </h4>
 
  <p style="font-size:80px; font-weight: 800;" align="center"> Unifies and modernizes schools of data extracted from software-defined assets, resources, schedules, and sensors deployed in a Dagster project. </p>
 
