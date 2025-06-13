@@ -1,7 +1,7 @@
 <!-- markdownlint-disable MD033 MD041-->
 
 <p align="center">
-  <h1 style="font-size:80px; font-weight: 800;" align="center">D A T A  I N L E T [ ⚠ W I P ]</h1>
+  <h1 style="font-size:80px; font-weight: 800;" align="center">D A T A  I N L E T</h1>
 </p>
 
 <div align="center">
